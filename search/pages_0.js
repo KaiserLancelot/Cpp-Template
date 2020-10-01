@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cpp_2dtemplate_26',['cpp-template',['../md_README.html',1,'']]]
+  ['cpp_2dtemplate_1',['cpp-template',['../md_README.html',1,'']]]
 ];

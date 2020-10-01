@@ -24,32 +24,15 @@
 */
 var NAVTREE =
 [
-  [ "cpp-template", "index.html", [
+  [ "klib", "index.html", [
     [ "cpp-template", "md_README.html", [
-      [ "Doc", "md_README.html#autotoc_md1", null ],
-      [ "Benchmark", "md_README.html#autotoc_md2", null ],
-      [ "Reference", "md_README.html#autotoc_md3", [
-        [ "Github Action", "md_README.html#autotoc_md4", null ],
-        [ "CMake", "md_README.html#autotoc_md5", null ],
-        [ "Coverage", "md_README.html#autotoc_md6", null ],
-        [ "Sanitizer", "md_README.html#autotoc_md7", null ],
-        [ "Tools", "md_README.html#autotoc_md8", null ]
-      ] ]
-    ] ],
-    [ "类", "annotated.html", [
-      [ "类列表", "annotated.html", "annotated_dup" ],
-      [ "类索引", "classes.html", null ],
-      [ "类成员", "functions.html", [
-        [ "全部", "functions.html", null ],
-        [ "函数", "functions_func.html", null ]
-      ] ]
-    ] ],
-    [ "文件", "files.html", [
-      [ "文件列表", "files.html", "files_dup" ],
-      [ "文件成员", "globals.html", [
-        [ "全部", "globals.html", null ],
-        [ "函数", "globals_func.html", null ],
-        [ "宏定义", "globals_defs.html", null ]
+      [ "Benchmark", "md_README.html#autotoc_md1", null ],
+      [ "Reference", "md_README.html#autotoc_md2", [
+        [ "Github Action", "md_README.html#autotoc_md3", null ],
+        [ "CMake", "md_README.html#autotoc_md4", null ],
+        [ "Coverage", "md_README.html#autotoc_md5", null ],
+        [ "Sanitizer", "md_README.html#autotoc_md6", null ],
+        [ "Tools", "md_README.html#autotoc_md7", null ]
       ] ]
     ] ]
   ] ]
@@ -57,7 +40,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"add_8h.html"
+"index.html"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';
