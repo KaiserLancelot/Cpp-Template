@@ -1,4 +1,6 @@
 var annotated_dup =
 [
-    [ "Bar", "classBar.html", "classBar" ]
+    [ "klib", null, [
+      [ "Bar", "classklib_1_1Bar.html", "classklib_1_1Bar" ]
+    ] ]
 ];
