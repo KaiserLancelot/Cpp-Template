@@ -36,7 +36,9 @@ jobs:
           CXX: g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DBUILD_TESTING=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug
+        run: |
+          cmake -S . -B build -DKLIB_BUILD_TESTS=ON -DKLIB_COVERAGE=ON \
+          -DCMAKE_BUILD_TYPE=Debug
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
@@ -78,7 +80,9 @@ jobs:
           sudo cmake --build build --config Release --target install
 
       - name: Configure
-        run: cmake -S . -B build -DBUILD_TESTING=ON -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug
+        run: |
+          cmake -S . -B build -DKLIB_BUILD_TESTS=ON -DKLIB_COVERAGE=ON \
+          -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build
         run: cmake --build build --config Debug -j`sysctl -n hw.ncpu` --target coverage

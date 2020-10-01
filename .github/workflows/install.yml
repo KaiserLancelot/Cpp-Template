@@ -35,12 +35,11 @@ jobs:
       - name: Run
         run: test-program
 
-      - name: Install test
+      - name: Install tests
         run: |
-          cd test_project
+          cd examples
           cmake -S . -B build
           cmake --build build --config Release -j$(nproc)
-          ./build/test-project
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
@@ -63,7 +62,7 @@ jobs:
           sudo apt install gcc-10 g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DBUILD_SHARED=ON
+        run: cmake -S . -B build -DKLIB_BUILD_SHARED=ON
         env:
           CC: gcc-10
           CXX: g++-10
@@ -77,12 +76,11 @@ jobs:
       - name: Run
         run: sudo ldconfig ; test-program
 
-      - name: Install test
+      - name: Install tests
         run: |
-          cd test_project
+          cd examples
           cmake -S . -B build
           cmake --build build --config Release -j$(nproc)
-          ./build/test-project
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
@@ -125,7 +123,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Configure
-        run: cmake -S . -B build -DBUILD_SHARED=ON
+        run: cmake -S . -B build -DKLIB_BUILD_SHARED=ON
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`

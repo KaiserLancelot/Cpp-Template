@@ -1,5 +1,4 @@
 include(GNUInstallDirs)
-include(CMakePackageConfigHelpers)
 
 set(project_config_in "${CMAKE_CURRENT_SOURCE_DIR}/cmake/klibConfig.cmake.in")
 set(project_config_out "${CMAKE_CURRENT_BINARY_DIR}/klibConfig.cmake")
@@ -18,23 +17,24 @@ if("${isSystemDir}" STREQUAL "-1")
   set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;$\{ORIGIN\}")
 endif()
 
-install(TARGETS ${PROGRAM_NAME} DESTINATION bin)
-install(TARGETS ${LIB_NAME} DESTINATION lib)
+install(TARGETS ${EXECUTABLE} DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS ${LIBRARY} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-install(DIRECTORY include/ DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(
-  TARGETS ${LIB_NAME}
-  EXPORT ${LIB_NAME}
+  TARGETS ${LIBRARY}
+  EXPORT ${LIBRARY}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(
-  EXPORT ${LIB_NAME}
+  EXPORT ${LIBRARY}
   DESTINATION ${export_dest_dir}
-  NAMESPACE ${LIB_NAME}::
+  NAMESPACE ${LIBRARY}::
   FILE ${config_targets_file})
 
+include(CMakePackageConfigHelpers)
 configure_file("${project_config_in}" "${project_config_out}" @ONLY)
 
 write_basic_package_version_file("${version_config_file}"

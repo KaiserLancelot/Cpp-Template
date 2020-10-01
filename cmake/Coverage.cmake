@@ -1,8 +1,10 @@
-if(COVERAGE)
+if(KLIB_COVERAGE)
   include(AddCompilerFlag)
 
   if(CMAKE_COMPILER_IS_GNUCXX)
-    message(STATUS "Building with coverage information, use lcov")
+    message(
+      STATUS
+        "Build tests with coverage information, use lcov to generate reports")
 
     add_required_compiler_flag("--coverage")
 
@@ -31,7 +33,7 @@ if(COVERAGE)
     add_custom_target(
       coverage
       COMMAND ${LCOV_EXECUTABLE} -d . -z
-      COMMAND ${TEST_PROGRAM_NAME}
+      COMMAND ${TESTS_EXECUTABLE}
       COMMAND
         ${LCOV_EXECUTABLE} -d . --include
         '${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp' --include
@@ -40,12 +42,15 @@ if(COVERAGE)
       COMMAND ${GENHTML_EXECUTABLE} lcov.info -o coverage -s --title
               "${PROJECT_NAME}" --legend --demangle-cpp --branch-coverage
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-      DEPENDS ${TEST_PROGRAM_NAME}
+      DEPENDS ${TESTS_EXECUTABLE}
       COMMENT
         "Generating HTML report ${CMAKE_CURRENT_BINARY_DIR}/coverage/index.html"
     )
   else()
-    message(STATUS "Building with coverage information, use llvm-cov")
+    message(
+      STATUS
+        "Build tests with coverage information, use llvm-cov to generate reports"
+    )
 
     add_required_compiler_flag("-fprofile-instr-generate")
     add_required_compiler_flag("-fcoverage-mapping")
@@ -63,21 +68,21 @@ if(COVERAGE)
 
     add_custom_target(
       coverage
-      COMMAND ${TEST_PROGRAM_NAME}
+      COMMAND ${TESTS_EXECUTABLE}
       COMMAND ${LLVM_PROFDATA_EXECUTABLE} merge -sparse -o
-              ${TEST_PROGRAM_NAME}.profdata default.profraw
+              ${TESTS_EXECUTABLE}.profdata default.profraw
       COMMAND
-        ${LLVM_COV_EXECUTABLE} show ${TEST_PROGRAM_NAME}
-        -instr-profile=${TEST_PROGRAM_NAME}.profdata -format=html
+        ${LLVM_COV_EXECUTABLE} show ${TESTS_EXECUTABLE}
+        -instr-profile=${TESTS_EXECUTABLE}.profdata -format=html
         -output-dir=coverage -show-line-counts-or-regions
         -ignore-filename-regex=${CMAKE_CURRENT_SOURCE_DIR}/tests/*
       COMMAND
-        ${LLVM_COV_EXECUTABLE} export ${TEST_PROGRAM_NAME}
-        -instr-profile=${TEST_PROGRAM_NAME}.profdata
+        ${LLVM_COV_EXECUTABLE} export ${TESTS_EXECUTABLE}
+        -instr-profile=${TESTS_EXECUTABLE}.profdata
         -ignore-filename-regex=${CMAKE_CURRENT_SOURCE_DIR}/tests/* -format=lcov
         > lcov.info
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-      DEPENDS ${TEST_PROGRAM_NAME}
+      DEPENDS ${TESTS_EXECUTABLE}
       COMMENT
         "Generating HTML report ${CMAKE_CURRENT_BINARY_DIR}/coverage/index.html"
     )

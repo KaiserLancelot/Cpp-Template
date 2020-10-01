@@ -1,5 +1,6 @@
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
-set(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR}" "${PROJECT_NAME}" ALL .)
+set(CPACK_INSTALL_CMAKE_PROJECTS ${CMAKE_CURRENT_BINARY_DIR} ${PROJECT_NAME}
+                                 ALL .)
 
 set(CPACK_PROJECT_URL "https://github.com/KaiserLancelot/cpp-template")
 set(CPACK_PACKAGE_VENDOR "kaiser")
@@ -22,7 +23,6 @@ if(APPLE)
 else()
   set(CPACK_GENERATOR "DEB")
   set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-  # set(CPACK_DEBIAN_PACKAGE_DEPENDS "")
 endif()
 
 include(CPack)

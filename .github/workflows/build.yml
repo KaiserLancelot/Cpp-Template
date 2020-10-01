@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
           CXX: g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DBUILD_TESTING=ON
+        run: cmake -S . -B build -DKLIB_BUILD_TESTS=ON
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
@@ -64,7 +64,7 @@ jobs:
           sudo cmake --build build --config Release --target install
 
       - name: Configure
-        run: cmake -S . -B build -DBUILD_TESTING=ON
+        run: cmake -S . -B build -DKLIB_BUILD_TESTS=ON
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`

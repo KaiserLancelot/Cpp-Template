@@ -28,7 +28,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DVALGRIND=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_VALGRIND=ON
         env:
           CC: gcc-10
           CXX: g++-10
@@ -60,7 +60,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DVALGRIND=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_VALGRIND=ON
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`

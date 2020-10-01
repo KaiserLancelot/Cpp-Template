@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 
-#include "bar.h"
+#include "klib/bar.h"
 
 TEST(BarTest, test1) {
-  Bar bar;
+  klib::Bar bar;
   ASSERT_EQ(bar.get_val(), 0);
 }
 
 TEST(BarTest, test2) {
-  Bar bar{42};
+  klib::Bar bar{42};
   ASSERT_EQ(bar.get_val(), 42);
 }

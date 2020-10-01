@@ -27,7 +27,7 @@ jobs:
           CXX: g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DBENCHMARK=ON
+        run: cmake -S . -B build -DKLIB_BUILD_BENCHMARKS=ON
         env:
           CC: gcc-10
           CXX: g++-10
@@ -36,10 +36,10 @@ jobs:
         run: cmake --build build --config Release -j$(nproc)
 
       - name: Run Benchmark(json)
-        run: ./build/test-benchmark --benchmark_out=benchmark-result.json --benchmark_out_format=json
+        run: ./build/benchmark --benchmark_out=benchmark-result.json --benchmark_out_format=json
 
       - name: Run Benchmark(txt)
-        run: ./build/test-benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
+        run: ./build/benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
 
       - name: Store benchmark result
         uses: rhysd/github-action-benchmark@v1
@@ -48,7 +48,7 @@ jobs:
           tool: "googlecpp"
           output-file-path: benchmark-result.json
           fail-on-alert: false
-          alert-threshold: "120%"
+          alert-threshold: "110%"
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: true
           alert-comment-cc-users: "@KaiserLancelot"
@@ -82,7 +82,7 @@ jobs:
           sudo cmake --build build --config Release --target install
 
       - name: Configure
-        run: cmake -S . -B build -DBENCHMARK=ON
+        run: cmake -S . -B build -DKLIB_BUILD_BENCHMARKS=ON
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
@@ -91,10 +91,10 @@ jobs:
           CPLUS_INCLUDE_PATH: /usr/local/include
 
       - name: Run Benchmark(json)
-        run: ./build/test-benchmark --benchmark_out=benchmark-result.json --benchmark_out_format=json
+        run: ./build/benchmark --benchmark_out=benchmark-result.json --benchmark_out_format=json
 
       - name: Run Benchmark(txt)
-        run: ./build/test-benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
+        run: ./build/benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
 
       - name: Store benchmark result
         uses: rhysd/github-action-benchmark@v1
@@ -103,7 +103,7 @@ jobs:
           tool: "googlecpp"
           output-file-path: benchmark-result.json
           fail-on-alert: false
-          alert-threshold: "120%"
+          alert-threshold: "110%"
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: true
           alert-comment-cc-users: "@KaiserLancelot"

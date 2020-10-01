@@ -1,5 +1,5 @@
-if(BUILD_DOC)
-  message(STATUS "Generating documentation")
+if(KLIB_BUILD_DOCS)
+  message(STATUS "Build documentations")
 
   find_package(Doxygen REQUIRED)
 
@@ -7,7 +7,7 @@ if(BUILD_DOC)
   set(README_DIR ${CMAKE_CURRENT_SOURCE_DIR}/README.md)
   set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
                  ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 
   add_custom_target(

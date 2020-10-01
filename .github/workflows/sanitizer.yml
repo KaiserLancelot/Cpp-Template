@@ -28,7 +28,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DSANITIZER="Address;Undefined"
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER="Address;Undefined"
         env:
           CC: clang-10
           CXX: clang++-10
@@ -74,7 +74,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DSANITIZER=Thread -DUSE_LIBCXX=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DUSE_LIBCXX=ON
         env:
           CC: clang-10
           CXX: clang++-10
@@ -118,7 +118,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DSANITIZER=Memory -DUSE_LIBCXX=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Memory -DUSE_LIBCXX=ON
         env:
           CC: clang-10
           CXX: clang++-10
@@ -149,7 +149,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DSANITIZER="Address;Undefined"
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER="Address;Undefined"
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`
@@ -198,7 +198,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DBUILD_TESTING=ON -DSANITIZER=Thread -DUSE_LIBCXX=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DUSE_LIBCXX=ON
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`

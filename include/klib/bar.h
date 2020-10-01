@@ -4,6 +4,8 @@
 
 #include <cstdint>
 
+namespace klib {
+
 /// test struct bar
 class Bar {
  public:
@@ -13,13 +15,15 @@ class Bar {
    * @brief A constructor
    * @param val Used to initialize members
    */
-  explicit Bar(std::int32_t val) : val_{val} {}
+  explicit Bar(std::int32_t val);
   /**
    * @brief A member fun
    * @return return val
    */
-  std::int32_t get_val() const { return val_; }
+  std::int32_t get_val() const;
 
  private:
   std::int32_t val_{};
 };
+
+}  // namespace klib

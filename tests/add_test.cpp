@@ -1,15 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "add.h"
+#include "klib/add.h"
 
-TEST(AddTest, test1) { ASSERT_EQ(add(1, 2), 3); }
+TEST(AddTest, test1) { ASSERT_EQ(klib::add(1, 2), 3); }
 
-TEST(AddTest, test2) { ASSERT_EQ(add(1, 2), 3); }
-
-TEST(AddTest, test3) { ASSERT_EQ(add(1, 2), 3); }
-
-TEST(AddTest, test4) { ASSERT_EQ(add(1, 2), 3); }
-
-TEST(AddTest, test5) { ASSERT_EQ(add(1, 2), 3); }
-
-TEST(AddTest, test6) { ASSERT_EQ(add(1, 2), 3); }
+TEST(AddTest, test2) { ASSERT_EQ(klib::add(5, 3), 8); }

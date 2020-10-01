@@ -1,10 +1,11 @@
 {
   "cmake.configureArgs": [
-    "-DBUILD_TESTING=ON",
-    "-DBUILD_DOC=ON",
-    "-DBENCHMARK=ON",
-    "-DCOVERAGE=ON",
-    "-DSANITIZER=Address;Undefined",
-    "-DFORMAT=ON"
+    "-DKLIB_BUILD_TESTS=ON",
+    "-DKLIB_BUILD_BENCHMARKS=ON",
+    "-DKLIB_BUILD_DOCS=ON",
+    "-DKLIB_FORMAT=ON",
+    "-DKLIB_COVERAGE=ON",
+    "-DKLIB_VALGRIND=ON",
+    "-DKLIB_SANITIZER=Address;Undefined"
   ]
 }

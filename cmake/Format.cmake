@@ -1,5 +1,5 @@
-if(FORMAT)
-  message(STATUS "Formating code using clang-foramt and cmake-foramt")
+if(KLIB_FORMAT)
+  message(STATUS "Format code using clang-format and cmake-format")
 
   find_program(CLANG_FORMAT_EXECUTABLE clang-format)
   find_program(CMAKE_FORMAT_EXECUTABLE cmake-format)
@@ -16,10 +16,10 @@ if(FORMAT)
     GLOB_RECURSE
     CLANG_FORMAT_SOURCES
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_project/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
 
   file(
@@ -27,12 +27,12 @@ if(FORMAT)
     CMAKE_FORMAT_SOURCES
     CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/*.cmake
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_project/*.cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/examples/CMakeLists.txt
     ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt)
 
   add_custom_target(
     format
     COMMAND ${CLANG_FORMAT_EXECUTABLE} -i ${CLANG_FORMAT_SOURCES}
     COMMAND ${CMAKE_FORMAT_EXECUTABLE} -i ${CMAKE_FORMAT_SOURCES}
-    COMMENT "Format C++ and CMake files")
+    COMMENT "Code formatting completed")
 endif()
