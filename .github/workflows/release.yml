@@ -7,6 +7,11 @@ on:
 jobs:
   ubuntu:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        config:
+          - { name: "GCC", cc: "gcc-10", cxx: "g++-10" }
+          - { name: "Clang", cc: "clang-10", cxx: "clang++-10" }
 
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +39,34 @@ jobs:
       - name: CPack
         run: cd build ; cpack
 
-      - name: Upload release asset
+      - name: Install
+        run: sudo dpkg -i build/klib-${{ env.RELEASE_VERSION }}-Linux.deb
+
+      - name: Run
+        run: executable
+
+      - name: Install tests
+        run: |
+          cd examples
+          cmake -S . -B build
+          cmake --build build --config Release -j$(nproc)
+        env:
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+
+      - name: Upload release asset(zip)
+        if: ${{ matrix.config.cxx == 'g++-10' }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Linux.zip
+          asset_name: klib-${{ env.RELEASE_VERSION }}-Linux.zip
+          asset_content_type: application/zip
+
+      - name: Upload release asset(deb)
+        if: ${{ matrix.config.cxx == 'g++-10' }}
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +76,6 @@ jobs:
           asset_name: klib-${{ env.RELEASE_VERSION }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
 
-  # TODO check
   macos:
     runs-on: macos-latest
 
@@ -68,12 +99,37 @@ jobs:
       - name: CPack
         run: cd build ; cpack
 
-      - name: Upload release asset
+      - name: Install
+        run: sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
+
+      - name: Run
+        run: executable
+
+      - name: Install tests
+        run: |
+          cd examples
+          cmake -S . -B build
+          cmake --build build --config Release -j`sysctl -n hw.ncpu`
+        env:
+          C_INCLUDE_PATH: /usr/local/include
+          CPLUS_INCLUDE_PATH: /usr/local/include
+
+      - name: Upload release asset(zip)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.dmg
-          asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.dmg
-          asset_content_type: application/x-apple-diskimage
+          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.zip
+          asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.zip
+          asset_content_type: application/zip
+
+      - name: Upload release asset(pkg)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
+          asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
+          asset_content_type: application/x-newton-compatible-pkg

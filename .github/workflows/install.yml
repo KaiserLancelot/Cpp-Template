@@ -106,12 +106,11 @@ jobs:
       - name: Run
         run: executable
 
-      - name: Install test
+      - name: Install tests
         run: |
-          cd test_project
+          cd examples
           cmake -S . -B build
           cmake --build build --config Release -j`sysctl -n hw.ncpu`
-          ./build/test-project
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
@@ -137,12 +136,11 @@ jobs:
       - name: Run
         run: executable
 
-      - name: Install test
+      - name: Install tests
         run: |
-          cd test_project
+          cd examples
           cmake -S . -B build
           cmake --build build --config Release -j`sysctl -n hw.ncpu`
-          ./build/test-project
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include

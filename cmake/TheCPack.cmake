@@ -19,9 +19,9 @@ set(CPACK_PACKAGE_RELOCATABLE
     CACHE BOOL "Build relocatable package")
 
 if(APPLE)
-  set(CPACK_GENERATOR "DragNDrop")
+  set(CPACK_GENERATOR "ZIP;productbuild")
 else()
-  set(CPACK_GENERATOR "DEB")
+  set(CPACK_GENERATOR "ZIP;DEB")
   set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 endif()
 
