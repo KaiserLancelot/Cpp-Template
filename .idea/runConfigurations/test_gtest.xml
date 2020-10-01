@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="test-gtest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpp-template" TARGET_NAME="test-gtest" CONFIG_NAME="Debug-clang" RUN_TARGET_PROJECT_NAME="cpp-template" RUN_TARGET_NAME="test-gtest" TEST_MODE="SUITE_TEST">
-    <method v="2">
-      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      <option name="BeforeTestRunTask" enabled="true" />
-    </method>
-  </configuration>
-</component>

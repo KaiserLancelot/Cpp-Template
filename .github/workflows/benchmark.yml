@@ -42,6 +42,7 @@ jobs:
         run: ./build/benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
 
       - name: Store benchmark result
+        if: ${{ github.event_name == 'push' }}
         uses: rhysd/github-action-benchmark@v1
         with:
           name: C++ Benchmark(Linux)
@@ -97,6 +98,7 @@ jobs:
         run: ./build/benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
 
       - name: Store benchmark result
+        if: ${{ github.event_name == 'push' }}
         uses: rhysd/github-action-benchmark@v1
         with:
           name: C++ Benchmark(macOS)
