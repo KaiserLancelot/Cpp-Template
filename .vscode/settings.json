@@ -5,7 +5,6 @@
     "-DKLIB_BUILD_DOCS=ON",
     "-DKLIB_FORMAT=ON",
     "-DKLIB_COVERAGE=ON",
-    "-DKLIB_VALGRIND=ON",
     "-DKLIB_SANITIZER=Address;Undefined"
   ]
 }
