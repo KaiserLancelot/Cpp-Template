@@ -28,7 +28,6 @@ https://kaiserlancelot.github.io/cpp-template/dev/bench/
 - https://github.com/coverallsapp/github-action
 - https://github.com/rhysd/github-action-benchmark
 - https://github.com/peaceiris/actions-gh-pages
-- https://github.com/shadowmoose/GHA-LoC-Badge
 
 ### CMake
 
