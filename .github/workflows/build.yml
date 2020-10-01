@@ -19,6 +19,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Make Code Badge
+        if: ${{ github.event_name == 'push' }}
+        uses: shadowmoose/GHA-LoC-Badge@1.0.0
+        with:
+          directory: ./
+          badge: ./output/badge.svg
+          patterns: "*.h|*.c|*.cpp"
+
+      - name: Push
+        if: ${{ github.event_name == 'push' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          keep_files: true
+
       - name: Install dependencies
         run: |
           sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
