@@ -1,13 +1,13 @@
 # cpp-template
 
-[![Build](https://github.com/KaiserLancelot/cpp-template/workflows/Build/badge.svg)](https://github.com/KaiserLancelot/cpp-template/actions)
+[![Build](https://github.com/KaiserLancelot/cpp-template/workflows/Build/badge.svg)](https://github.com/KaiserLancelot/cpp-template/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/KaiserLancelot/cpp-template/badge.svg)](https://coveralls.io/github/KaiserLancelot/cpp-template)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue)](https://kaiserlancelot.github.io/cpp-template)
 [![GitHub License](https://img.shields.io/github/license/KaiserLancelot/cpp-template)](https://raw.githubusercontent.com/KaiserLancelot/cpp-template/master/LICENSE)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![GitHub Releases](https://img.shields.io/github/release/KaiserLancelot/cpp-template)](https://github.com/KaiserLancelot/cpp-template/releases)
 [![GitHub Downloads](https://img.shields.io/github/downloads/KaiserLancelot/cpp-template/total)](https://github.com/KaiserLancelot/cpp-template/releases)
-[![GitHub Issues](https://img.shields.io/github/issues/KaiserLancelot/cpp-template)](https://github.com/KaiserLancelot/cpp-template/issues)
+[![Bugs](https://img.shields.io/github/issues/KaiserLancelot/cpp-template/bug)](https://github.com/KaiserLancelot/cpp-template/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 A template for C++ projects using CMake
 
