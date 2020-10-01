@@ -13,7 +13,7 @@ endif()
 include(CMakeDependentOption)
 cmake_dependent_option(KLIB_COVERAGE "Build tests with coverage information"
                        OFF "KLIB_BUILD_TESTS" OFF)
-cmake_dependent_option(KLIB_VALGRIND "Execute tests with Valgrind" OFF
+cmake_dependent_option(KLIB_VALGRIND "Execute tests with valgrind" OFF
                        "KLIB_BUILD_TESTS" OFF)
 
 set(KLIB_SANITIZER
