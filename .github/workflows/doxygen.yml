@@ -1,6 +1,6 @@
 name: Doxygen
 
-on: push
+on: [push, pull_request]
 
 jobs:
   ubuntu:
@@ -34,11 +34,20 @@ jobs:
         run: cmake --build build --config Release --target doc
 
       - name: Push
+        if: ${{ github.event_name == 'push' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/html
           keep_files: true
+
+      - name: Upload artifact
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: doxygen-linux
+          path: build/html
+          if-no-files-found: error
 
   macos:
     runs-on: macos-latest

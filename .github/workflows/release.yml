@@ -45,7 +45,7 @@ jobs:
       - name: Run
         run: executable
 
-      - name: Install tests
+      - name: Install test
         run: |
           cd examples
           cmake -S . -B build
@@ -100,12 +100,12 @@ jobs:
         run: cd build ; cpack
 
       - name: Install
-        run: sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
+        run: sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg -target /
 
       - name: Run
         run: executable
 
-      - name: Install tests
+      - name: Install test
         run: |
           cd examples
           cmake -S . -B build

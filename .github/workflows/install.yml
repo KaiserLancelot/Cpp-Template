@@ -35,7 +35,7 @@ jobs:
       - name: Run
         run: executable
 
-      - name: Install tests
+      - name: Install test
         run: |
           cd examples
           cmake -S . -B build
@@ -76,7 +76,7 @@ jobs:
       - name: Run
         run: sudo ldconfig ; executable
 
-      - name: Install tests
+      - name: Install test
         run: |
           cd examples
           cmake -S . -B build
@@ -106,7 +106,7 @@ jobs:
       - name: Run
         run: executable
 
-      - name: Install tests
+      - name: Install test
         run: |
           cd examples
           cmake -S . -B build
@@ -136,7 +136,7 @@ jobs:
       - name: Run
         run: executable
 
-      - name: Install tests
+      - name: Install test
         run: |
           cd examples
           cmake -S . -B build
