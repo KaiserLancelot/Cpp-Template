@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/KaiserLancelot/cpp-template/workflows/Build/badge.svg)](https://github.com/KaiserLancelot/cpp-template/actions)
 [![Coverage Status](https://coveralls.io/repos/github/KaiserLancelot/cpp-template/badge.svg)](https://coveralls.io/github/KaiserLancelot/cpp-template)
-![Lines Of Code](https://raw.githubusercontent.com/KaiserLancelot/cpp-template/gh-pages/output/badge.svg)
+![Lines Of Code](https://raw.githubusercontent.com/KaiserLancelot/cpp-template/gh-pages/badge.svg)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue)](https://kaiserlancelot.github.io/cpp-template)
 [![GitHub License](https://img.shields.io/github/license/KaiserLancelot/cpp-template)](https://raw.githubusercontent.com/KaiserLancelot/cpp-template/master/LICENSE)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
