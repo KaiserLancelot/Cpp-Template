@@ -125,12 +125,12 @@ jobs:
           asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.zip
           asset_content_type: application/zip
 
-      # - name: Upload release asset(pkg)
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ github.event.release.upload_url }}
-      #     asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
-      #     asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
-      #     asset_content_type: application/x-newton-compatible-pkg
+      - name: Upload release asset(pkg)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
+          asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
+          asset_content_type: application/x-newton-compatible-pkg
