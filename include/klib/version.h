@@ -7,7 +7,7 @@
 /// minor version
 #define KLIB_VER_MINOR 1
 /// patch version
-#define KLIB_VER_PATCH 2
+#define KLIB_VER_PATCH 6
 
 /// version
 #define KLIB_VERSION \
