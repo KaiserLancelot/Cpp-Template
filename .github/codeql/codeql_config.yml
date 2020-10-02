@@ -2,4 +2,6 @@ name: CodeQL-Config
 
 queries:
   - uses: security-and-quality
-# TODO include/exclude/filters
+# TODO The "paths"/"paths-ignore" fields of the config
+# only have effect for Javascript and Python
+# https://github.com/github/codeql-action/blob/main/src/analysis-paths.ts

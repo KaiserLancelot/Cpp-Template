@@ -160,12 +160,12 @@ jobs:
       - name: Test
         run: cd build ; ctest -C RelWithDebInfo -j`sysctl -n hw.ncpu` --output-on-failure
         env:
-          # TODO AppleClang does not support LeakSanitizer
+          # TODO AppleClang does not support LeakSanitizer, consider using clang
           # ASAN_OPTIONS: detect_leaks=1
           ASAN_OPTIONS: detect_stack_use_after_return=1
           UBSAN_OPTIONS: print_stacktrace=1
 
-  # TODO check
+  # TODO Check if it is correct
   macos-thread:
     runs-on: macos-latest
 

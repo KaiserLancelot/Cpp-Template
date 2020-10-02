@@ -8,7 +8,7 @@ on:
 
 jobs:
   ubuntu:
-    # TODO use ubuntu-latest
+    # TODO Use ubuntu-latest
     runs-on: ubuntu-20.04
     strategy:
       matrix:

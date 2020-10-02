@@ -43,3 +43,5 @@ write_basic_package_version_file(${VERSION_CONFIG_FILE}
                                  COMPATIBILITY SameMajorVersion)
 install(FILES ${PROJECT_CONFIG_OUT} ${VERSION_CONFIG_FILE}
         DESTINATION ${EXPORT_DEST_DIR})
+
+# TODO Write a find module

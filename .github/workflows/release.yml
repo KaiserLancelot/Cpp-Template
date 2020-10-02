@@ -99,7 +99,7 @@ jobs:
       - name: CPack
         run: cd build ; cpack
 
-      # FIXME
+      # FIXME Packaging configuration error. Modify TheCPack.cmake
       # - name: Install
       #   run: sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg -target /
 

@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # FIXME clang-tidy
+      # FIXME clang-tidy failed to install using apt
       - name: Install dependencies
         run: |
           sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa

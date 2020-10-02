@@ -22,6 +22,7 @@ if(APPLE)
   set(CPACK_GENERATOR ZIP;productbuild)
 else()
   set(CPACK_GENERATOR ZIP;DEB)
+  # TODO Solve dependency problems
   set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 endif()
 
