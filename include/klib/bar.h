@@ -1,5 +1,5 @@
 /// \file bar.h
-/// \brief Contains the declaration of the function b
+/// \brief Contains the declaration of the class Bar
 
 #pragma once
 

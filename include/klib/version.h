@@ -1,5 +1,5 @@
 /// \file version.h
-/// \brief Contains the declaration of the macro#pragma once
+/// \brief Contains the declaration of the macro
 
 #pragma once
 
@@ -8,7 +8,7 @@
 /// klib minor version
 #define KLIB_VER_MINOR 2
 /// klib patch version
-#define KLIB_VER_PATCH 1
+#define KLIB_VER_PATCH 2
 
 /// klib version
 #define KLIB_VERSION \
