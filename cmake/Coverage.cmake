@@ -8,8 +8,8 @@ if(KLIB_COVERAGE)
 
     add_required_compiler_flag("--coverage")
 
-    get_filename_component(COMPILER_PATH "${CMAKE_CXX_COMPILER}" PATH)
-    string(REGEX MATCH "^[0-9]+" GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
+    get_filename_component(COMPILER_PATH ${CMAKE_CXX_COMPILER} PATH)
+    string(REGEX MATCH "^[0-9]+" GCC_VERSION ${CMAKE_CXX_COMPILER_VERSION})
     find_program(
       GCOV_EXECUTABLE
       NAMES gcov-${GCC_VERSION} gcov

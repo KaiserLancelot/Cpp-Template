@@ -1,20 +1,22 @@
 include(GNUInstallDirs)
 
-set(project_config_in "${CMAKE_CURRENT_SOURCE_DIR}/cmake/klibConfig.cmake.in")
-set(project_config_out "${CMAKE_CURRENT_BINARY_DIR}/klibConfig.cmake")
-set(config_targets_file "klibConfigTargets.cmake")
-set(version_config_file "${CMAKE_CURRENT_BINARY_DIR}/klibConfigVersion.cmake")
-set(export_dest_dir "${CMAKE_INSTALL_LIBDIR}/cmake/klib")
+set(PROJECT_CONFIG_IN "${CMAKE_CURRENT_SOURCE_DIR}/cmake/klibConfig.cmake.in")
+set(PROJECT_CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/klibConfig.cmake")
+set(VERSION_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/klibConfigVersion.cmake")
+set(EXPORT_DEST_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/klib")
+set(CONFIG_TARGETS_FILE klibConfigTargets.cmake)
 
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;$\{ORIGIN\}")
+set(CMAKE_INSTALL_RPATH
+    "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR};$\{ORIGIN\}")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES
-     "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
-if("${isSystemDir}" STREQUAL "-1")
-  set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib;$\{ORIGIN\}")
+     "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" isSystemDir)
+if(${isSystemDir} STREQUAL "-1")
+  set(CMAKE_INSTALL_RPATH
+      "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR};$\{ORIGIN\}")
 endif()
 
 install(TARGETS ${EXECUTABLE} DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -30,14 +32,14 @@ install(
 
 install(
   EXPORT ${LIBRARY}
-  DESTINATION ${export_dest_dir}
+  DESTINATION ${EXPORT_DEST_DIR}
   NAMESPACE ${LIBRARY}::
-  FILE ${config_targets_file})
+  FILE ${CONFIG_TARGETS_FILE})
 
 include(CMakePackageConfigHelpers)
-configure_file("${project_config_in}" "${project_config_out}" @ONLY)
+configure_file(${PROJECT_CONFIG_IN} ${PROJECT_CONFIG_OUT} @ONLY)
 
-write_basic_package_version_file("${version_config_file}"
+write_basic_package_version_file(${VERSION_CONFIG_FILE}
                                  COMPATIBILITY SameMajorVersion)
-install(FILES "${project_config_out}" "${version_config_file}"
-        DESTINATION "${export_dest_dir}")
+install(FILES ${PROJECT_CONFIG_OUT} ${VERSION_CONFIG_FILE}
+        DESTINATION ${EXPORT_DEST_DIR})

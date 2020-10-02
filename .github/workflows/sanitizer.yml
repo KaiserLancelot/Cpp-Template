@@ -74,7 +74,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DUSE_LIBCXX=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
         env:
           CC: clang-10
           CXX: clang++-10
@@ -118,7 +118,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Memory -DUSE_LIBCXX=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Memory -DKLIB_USE_LIBCXX=ON
         env:
           CC: clang-10
           CXX: clang++-10
@@ -198,7 +198,7 @@ jobs:
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DUSE_LIBCXX=ON
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`

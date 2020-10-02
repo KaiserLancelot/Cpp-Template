@@ -5,9 +5,9 @@
 /// major verion
 #define KLIB_VER_MAJOR 2
 /// minor version
-#define KLIB_VER_MINOR 1
+#define KLIB_VER_MINOR 2
 /// patch version
-#define KLIB_VER_PATCH 6
+#define KLIB_VER_PATCH 0
 
 /// version
 #define KLIB_VERSION \

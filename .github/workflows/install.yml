@@ -32,10 +32,10 @@ jobs:
       - name: Install
         run: sudo cmake --build build --config Release --target install
 
-      - name: Run
+      - name: Run executable
         run: executable
 
-      - name: Install test
+      - name: Build examples
         run: |
           cd examples
           cmake -S . -B build
@@ -73,10 +73,10 @@ jobs:
       - name: Install
         run: sudo cmake --build build --config Release --target install
 
-      - name: Run
+      - name: Run executable
         run: sudo ldconfig ; executable
 
-      - name: Install test
+      - name: Build examples
         run: |
           cd examples
           cmake -S . -B build
@@ -103,10 +103,10 @@ jobs:
       - name: Install
         run: sudo cmake --build build --config Release --target install
 
-      - name: Run
+      - name: Run executable
         run: executable
 
-      - name: Install test
+      - name: Build examples
         run: |
           cd examples
           cmake -S . -B build
@@ -133,10 +133,10 @@ jobs:
       - name: Install
         run: sudo cmake --build build --config Release --target install
 
-      - name: Run
+      - name: Run executable
         run: executable
 
-      - name: Install test
+      - name: Build examples
         run: |
           cd examples
           cmake -S . -B build
