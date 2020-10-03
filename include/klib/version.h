@@ -6,9 +6,9 @@
 /// klib major verion
 #define KLIB_VER_MAJOR 2
 /// klib minor version
-#define KLIB_VER_MINOR 3
+#define KLIB_VER_MINOR 4
 /// klib patch version
-#define KLIB_VER_PATCH 2
+#define KLIB_VER_PATCH 0
 
 /// klib version
 #define KLIB_VERSION \

@@ -6,7 +6,7 @@ if(KLIB_BUILD_COVERAGE OR KLIB_BUILD_ALL)
       STATUS
         "Build tests with coverage information, use lcov to generate reports")
 
-    add_required_compiler_flag("--coverage")
+    add_compiler_flag("--coverage")
 
     # https://github.com/RWTH-HPC/CMake-codecov/blob/master/cmake/FindGcov.cmake
     get_filename_component(COMPILER_PATH ${CMAKE_CXX_COMPILER} PATH)
@@ -53,8 +53,8 @@ if(KLIB_BUILD_COVERAGE OR KLIB_BUILD_ALL)
         "Build tests with coverage information, use llvm-cov to generate reports"
     )
 
-    add_required_compiler_flag("-fprofile-instr-generate")
-    add_required_compiler_flag("-fcoverage-mapping")
+    add_compiler_flag("-fprofile-instr-generate")
+    add_compiler_flag("-fcoverage-mapping")
 
     find_program(LLVM_PROFDATA_EXECUTABLE llvm-profdata)
     find_program(LLVM_COV_EXECUTABLE llvm-cov)
