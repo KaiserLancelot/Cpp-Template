@@ -2,6 +2,7 @@
   "cmake.configureArgs": [
     "-DKLIB_BUILD_ALL=ON",
     "-DKLIB_FORMAT=ON",
-    "-DKLIB_SANITIZER=Address;Undefined"
+    "-DKLIB_SANITIZER=Address;Undefined",
+    "-DKLIB_USE_LIBCXX=ON"
   ]
 }

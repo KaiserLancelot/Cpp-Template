@@ -21,11 +21,6 @@ function(add_required_compiler_flag FLAG)
   check_cxx_compiler_flag(${FLAG} ${MANGLED_FLAG}_CXX)
   set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQUIRED_FLAGS})
 
-  set(VARIANT ${ARGV1})
-  if(ARGV1)
-    string(TOUPPER "_${VARIANT}" VARIANT)
-  endif()
-
   if(${MANGLED_FLAG}_C OR ${MANGLED_FLAG}_CXX)
     set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_EXE_LINKER_FLAGS} ${FLAG}"
@@ -45,14 +40,14 @@ function(add_required_compiler_flag FLAG)
   endif()
 
   if(${MANGLED_FLAG}_C)
-    set(CMAKE_C_FLAGS${VARIANT}
-        "${CMAKE_C_FLAGS${VARIANT}} ${FLAG}"
+    set(CMAKE_C_FLAGS
+        "${CMAKE_C_FLAGS} ${FLAG}"
         PARENT_SCOPE)
   endif()
 
   if(${MANGLED_FLAG}_CXX)
-    set(CMAKE_CXX_FLAGS${VARIANT}
-        "${CMAKE_CXX_FLAGS${VARIANT}} ${FLAG}"
+    set(CMAKE_CXX_FLAGS
+        "${CMAKE_CXX_FLAGS} ${FLAG}"
         PARENT_SCOPE)
   endif()
 endfunction()
