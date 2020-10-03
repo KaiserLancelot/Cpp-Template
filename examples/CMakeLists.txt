@@ -23,4 +23,12 @@ foreach(FILE_PATH ${SRC})
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     DEPENDS ${FILE_NAME}
     COMMENT "Run ${FILE_NAME}")
+
+  add_custom_target(
+    run-${FILE_NAME}-pkg-config ALL
+    COMMAND ${CMAKE_CXX_COMPILER} ${FILE_PATH} -o ${FILE_NAME} `pkg-config
+            --libs --cflags klib`
+    COMMAND ${FILE_NAME}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Run ${FILE_NAME} pkg-config")
 endforeach()

@@ -1,4 +1,4 @@
-if(KLIB_BUILD_DOCS)
+if(KLIB_BUILD_DOCS OR KLIB_BUILD_ALL)
   message(STATUS "Build documentations")
 
   find_package(Doxygen REQUIRED)

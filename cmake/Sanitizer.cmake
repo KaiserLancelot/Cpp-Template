@@ -1,9 +1,9 @@
 if(KLIB_SANITIZER)
+  include(AddCompilerFlag)
+
   if(NOT (KLIB_SANITIZER STREQUAL "Thread"))
     add_required_compiler_flag("-fno-omit-frame-pointer")
   endif()
-
-  include(AddCompilerFlag)
 
   macro(append_address_sanitizer_flags)
     add_required_compiler_flag("-fsanitize=address")

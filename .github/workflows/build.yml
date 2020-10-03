@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
+        build_type: [Debug, Release]
         config:
           - { name: "GCC", cc: "gcc-10", cxx: "g++-10" }
           - { name: "Clang", cc: "clang-10", cxx: "clang++-10" }
@@ -37,7 +38,9 @@ jobs:
           CXX: g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_TESTS=ON
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DKLIB_BUILD_TESTS=ON
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
@@ -50,6 +53,9 @@ jobs:
 
   macos:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
 
     steps:
       - uses: actions/checkout@v2
@@ -65,7 +71,9 @@ jobs:
           sudo cmake --build build --config Release --target install
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_TESTS=ON
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DKLIB_BUILD_TESTS=ON
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`

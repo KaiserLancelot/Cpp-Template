@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "Linux",
+      "name": "Ubuntu",
       "includePath": [
         "${workspaceFolder}/include",
         "/usr/include/c++/10",

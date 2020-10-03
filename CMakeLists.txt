@@ -20,11 +20,17 @@ include(Doxygen)
 include(Format)
 include(Sanitizer)
 
+# ---------------------------------------------------------------------------------------
+# Set name
+# ---------------------------------------------------------------------------------------
 set(LIBRARY ${PROJECT_NAME})
 set(EXECUTABLE executable)
 set(TESTS_EXECUTABLE gtest)
 set(BENCHMARKS_EXECUTABLE benchmark)
 
+# ---------------------------------------------------------------------------------------
+# Build static/shared library
+# ---------------------------------------------------------------------------------------
 file(GLOB_RECURSE LIBRARY_SRC CONFIGURE_DEPENDS
      ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 set(EXECUTABLE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
@@ -45,25 +51,30 @@ if(NOT KLIB_BUILD_SHARED)
   include(LTO)
 endif()
 
+include(GNUInstallDirs)
 target_include_directories(
   ${LIBRARY} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
+target_compile_definitions(${LIBRARY} PUBLIC KLIB_COMPILED_LIB)
+target_compile_features(${LIBRARY} PUBLIC cxx_std_20)
+
 set_target_properties(${LIBRARY} PROPERTIES VERSION ${KLIB_VERSION}
                                             SOVERSION ${KLIB_VERSION_MAJOR})
 set_target_properties(${LIBRARY} PROPERTIES DEBUG_POSTFIX d)
 
-add_executable(${EXECUTABLE} ${EXECUTABLE_SRC})
-target_link_libraries(${EXECUTABLE} PRIVATE ${LIBRARY})
+# ---------------------------------------------------------------------------------------
+# Build executable
+# ---------------------------------------------------------------------------------------
+if(KLIB_BUILD_EXECUTABLE OR KLIB_BUILD_ALL)
+  add_executable(${EXECUTABLE} ${EXECUTABLE_SRC})
+  target_link_libraries(${EXECUTABLE} PRIVATE ${LIBRARY})
+endif()
 
-add_custom_target(
-  run
-  COMMAND ${EXECUTABLE}
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-  DEPENDS ${EXECUTABLE}
-  COMMENT "Run")
-
+# ---------------------------------------------------------------------------------------
+# Build tests
+# ---------------------------------------------------------------------------------------
 include(CTest)
-if(BUILD_TESTING AND KLIB_BUILD_TESTS)
+if(BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL))
   message(STATUS "Build tests")
 
   enable_testing()
@@ -79,16 +90,12 @@ if(BUILD_TESTING AND KLIB_BUILD_TESTS)
   add_executable(${TESTS_EXECUTABLE} ${TESTS_SRC})
   target_link_libraries(${TESTS_EXECUTABLE} PRIVATE ${LIBRARY} GTest::gtest)
   gtest_discover_tests(${TESTS_EXECUTABLE})
-
-  add_custom_target(
-    run-tests
-    COMMAND ${TESTS_EXECUTABLE}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    DEPENDS ${TESTS_EXECUTABLE}
-    COMMENT "Run tests")
 endif()
 
-if(KLIB_BUILD_BENCHMARKS)
+# ---------------------------------------------------------------------------------------
+# Build benchmarks
+# ---------------------------------------------------------------------------------------
+if(KLIB_BUILD_BENCHMARKS OR KLIB_BUILD_ALL)
   message(STATUS "Build benchmarks")
 
   file(GLOB_RECURSE BENCHMARK_SRC CONFIGURE_DEPENDS
@@ -99,14 +106,6 @@ if(KLIB_BUILD_BENCHMARKS)
   add_executable(${BENCHMARKS_EXECUTABLE} ${BENCHMARK_SRC})
   target_link_libraries(${BENCHMARKS_EXECUTABLE} PRIVATE ${LIBRARY}
                                                          benchmark::benchmark)
-
-  add_custom_target(
-    run-benchmarks
-    COMMAND ${BENCHMARKS_EXECUTABLE}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    DEPENDS ${BENCHMARKS_EXECUTABLE}
-    COMMENT "Run benchmarks")
 endif()
 
 include(Install)
-include(TheCPack)

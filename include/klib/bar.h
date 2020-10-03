@@ -19,7 +19,7 @@ class Bar {
 
   /// \brief A member fun
   /// \return return val
-  std::int32_t get_val() const;
+  [[nodiscard]] std::int32_t get_val() const;
 
  private:
   std::int32_t val_{};
