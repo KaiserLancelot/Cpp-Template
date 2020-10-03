@@ -25,6 +25,7 @@ jobs:
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
           cmake --build build --config Release -j$(nproc)
           sudo cmake --build build --config Release --target install
+          sudo ldconfig
         env:
           CC: gcc-10
           CXX: g++-10

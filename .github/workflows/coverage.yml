@@ -30,6 +30,7 @@ jobs:
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
           cmake --build build --config Release -j$(nproc)
           sudo cmake --build build --config Release --target install
+          sudo ldconfig
           cd ..
           wget -q https://github.com/linux-test-project/lcov/archive/v1.15.zip
           unzip -q v1.15.zip
@@ -82,6 +83,7 @@ jobs:
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
           cmake --build build --config Release -j`sysctl -n hw.ncpu`
           sudo cmake --build build --config Release --target install
+          sudo update_dyld_shared_cache
 
       - name: Configure
         run: |

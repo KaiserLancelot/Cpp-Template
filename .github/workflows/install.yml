@@ -38,7 +38,9 @@ jobs:
         run: cmake --build build --config Release -j$(nproc)
 
       - name: Install
-        run: sudo cmake --build build --config Release --target install
+        run: |
+          sudo cmake --build build --config Release --target install
+          sudo ldconfig
 
       - name: Run executable
         run: executable
@@ -76,7 +78,9 @@ jobs:
           CPLUS_INCLUDE_PATH: /usr/local/include
 
       - name: Install
-        run: sudo cmake --build build --config Release --target install
+        run: |
+          sudo cmake --build build --config Release --target install
+          sudo update_dyld_shared_cache
 
       - name: Run executable
         run: executable

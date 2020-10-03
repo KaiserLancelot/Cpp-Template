@@ -29,6 +29,7 @@ jobs:
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
           cmake --build build --config Release -j$(nproc)
           sudo cmake --build build --config Release --target install
+          sudo ldconfig
         env:
           CC: gcc-10
           CXX: g++-10
@@ -65,6 +66,7 @@ jobs:
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
           cmake --build build --config Release -j`sysctl -n hw.ncpu`
           sudo cmake --build build --config Release --target install
+          sudo update_dyld_shared_cache
 
       - name: Configure
         run: cmake -S . -B build -DKLIB_CLANG_TIDY=ON

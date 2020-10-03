@@ -40,7 +40,9 @@ jobs:
         run: cd build ; cpack
 
       - name: Install
-        run: sudo dpkg -i build/klib-${{ env.RELEASE_VERSION }}-Linux.deb
+        run: |
+          sudo dpkg -i build/klib-${{ env.RELEASE_VERSION }}-Linux.deb
+          sudo ldconfig
 
       - name: Run executable
         run: executable
@@ -101,7 +103,9 @@ jobs:
 
       # FIXME Packaging configuration error. Modify TheCPack.cmake
       # - name: Install
-      #   run: sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg -target /
+      #   run: |
+      #     sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg -target /
+      #     sudo update_dyld_shared_cache
 
       # - name: Run executable
       #   run: executable
