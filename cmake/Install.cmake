@@ -23,7 +23,6 @@ if(KLIB_INSTALL)
     endif()
 
     install(TARGETS ${EXECUTABLE} DESTINATION ${CMAKE_INSTALL_BINDIR})
-    install(TARGETS ${LIBRARY} DESTINATION ${CMAKE_INSTALL_LIBDIR})
   endif()
 
   # ---------------------------------------------------------------------------------------
@@ -93,9 +92,9 @@ if(KLIB_INSTALL)
   set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
   set(CPACK_INSTALL_CMAKE_PROJECTS ${CMAKE_CURRENT_BINARY_DIR} ${LIBRARY} ALL .)
 
+  set(CPACK_PROJECT_URL ${KLIB_PROJECT_URL})
   set(CPACK_PACKAGE_VENDOR ${KLIB_VENDOR})
   set(CPACK_PACKAGE_CONTACT ${KLIB_CONTACT})
-  set(CPACK_PROJECT_URL ${KLIB_PROJECT_URL})
   set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${KLIB_DESCRIPTION_SUMMARY})
   set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
   set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
@@ -109,6 +108,7 @@ if(KLIB_INSTALL)
   set(CPACK_PACKAGE_RELOCATABLE
       ON
       CACHE BOOL "Build relocatable package")
+  set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 
   if(APPLE)
     set(CPACK_GENERATOR
@@ -118,8 +118,11 @@ if(KLIB_INSTALL)
     set(CPACK_GENERATOR
         "ZIP;DEB"
         CACHE STRING "Semicolon separated list of generators")
-    # TODO Solve dependency problems
+
     set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+
+    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS "")
+    include(InstallRequiredSystemLibraries)
   endif()
 
   include(CPack)
