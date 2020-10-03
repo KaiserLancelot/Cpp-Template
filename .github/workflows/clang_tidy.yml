@@ -78,6 +78,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: clang-tidy-linux
+          name: clang-tidy-macos
           path: build/clang-tidy.txt
           if-no-files-found: error

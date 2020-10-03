@@ -1,3 +1,5 @@
+# https://github.com/gabime/spdlog/blob/v1.x/CMakeLists.txt
+# https://github.com/gabime/spdlog/blob/v1.x/cmake/spdlogCPack.cmake
 if(KLIB_INSTALL)
   message(STATUS "Generate the install target")
 

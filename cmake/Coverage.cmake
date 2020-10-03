@@ -8,6 +8,7 @@ if(KLIB_BUILD_COVERAGE OR KLIB_BUILD_ALL)
 
     add_required_compiler_flag("--coverage")
 
+    # https://github.com/RWTH-HPC/CMake-codecov/blob/master/cmake/FindGcov.cmake
     get_filename_component(COMPILER_PATH ${CMAKE_CXX_COMPILER} PATH)
     string(REGEX MATCH "^[0-9]+" GCC_VERSION ${CMAKE_CXX_COMPILER_VERSION})
     find_program(

@@ -1,3 +1,4 @@
+# https://github.com/gabime/spdlog/blob/v1.x/cmake/utils.cmake
 function(klib_extract_version)
   file(READ "${CMAKE_CURRENT_SOURCE_DIR}/include/klib/version.h" FILE_CONTENTS)
 
