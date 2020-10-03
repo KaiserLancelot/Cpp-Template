@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        build_shared: [ON, OFF]
+        options:
+          - { build_shared: "ON", use_add_sub: "OFF" }
+          - { build_shared: "OFF", use_add_sub: "OFF" }
+          - { build_shared: "OFF", use_add_sub: "ON" }
         config:
           - { name: "GCC", cc: "gcc-10", cxx: "g++-10" }
           - { name: "Clang", cc: "clang-10", cxx: "clang++-10" }
@@ -26,7 +29,7 @@ jobs:
           sudo apt install gcc-10 g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.build_shared }}
+        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.config.build_shared }}
         env:
           CC: gcc-10
           CXX: g++-10
@@ -42,8 +45,10 @@ jobs:
 
       - name: Build examples
         run: |
-          cd examples
-          cmake -S . -B build
+          cp examples -r ../
+          cd ../examples
+          cp -r ../cpp-template .
+          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.config.use_add_sub }}
           cmake --build build --config Release -j$(nproc)
         env:
           CC: ${{ matrix.config.cc }}
@@ -53,13 +58,16 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        build_shared: [ON, OFF]
+        options:
+          - { build_shared: "ON", use_add_sub: "OFF" }
+          - { build_shared: "OFF", use_add_sub: "OFF" }
+          - { build_shared: "OFF", use_add_sub: "ON" }
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.build_shared }}
+        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.config.build_shared }}
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
@@ -75,8 +83,10 @@ jobs:
 
       - name: Build examples
         run: |
-          cd examples
-          cmake -S . -B build
+          cp examples -r ../
+          cd ../examples
+          cp -r ../cpp-template .
+          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.config.use_add_sub }}
           cmake --build build --config Release -j`sysctl -n hw.ncpu`
         env:
           C_INCLUDE_PATH: /usr/local/include
