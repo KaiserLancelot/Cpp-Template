@@ -1,5 +1,6 @@
 #include <cstdint>
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "klib/add.h"
@@ -10,6 +11,8 @@ int main() {
   v.push_back(1);
   v.push_back(2);
   v.push_back(3);
+
+  std::string str{"Hello World!"};
 
   std::cout << klib::add(1, 2) << '\n';
   std::cout << klib::Bar{42}.get_val() << '\n';
