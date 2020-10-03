@@ -64,8 +64,6 @@ if(KLIB_INSTALL)
   install(FILES ${KLIB_PROJECT_CONFIG_OUT} ${KLIB_VERSION_CONFIG_FILE}
           DESTINATION ${KLIB_EXPORT_DEST_DIR})
 
-  # TODO Write a find module
-
   # ---------------------------------------------------------------------------------------
   # Project information
   # ---------------------------------------------------------------------------------------
