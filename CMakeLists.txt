@@ -66,6 +66,7 @@ set_target_properties(${LIBRARY} PROPERTIES DEBUG_POSTFIX d)
 # Build executable
 # ---------------------------------------------------------------------------------------
 if(KLIB_BUILD_EXECUTABLE OR KLIB_BUILD_ALL)
+  message(STATUS "Build executable")
   add_executable(${EXECUTABLE} ${EXECUTABLE_SRC})
   target_link_libraries(${EXECUTABLE} PRIVATE ${LIBRARY})
 endif()

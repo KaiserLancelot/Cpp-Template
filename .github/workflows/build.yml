@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        build_type: [Debug, Release]
+        build_type:
+          - { name: "Release" }
+          - { name: "Debug" }
         config:
           - { name: "GCC", cc: "gcc-10", cxx: "g++-10" }
           - { name: "Clang", cc: "clang-10", cxx: "clang++-10" }
@@ -39,23 +41,25 @@ jobs:
 
       - name: Configure
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type.name }} \
           -DKLIB_BUILD_TESTS=ON
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
 
       - name: Build
-        run: cmake --build build --config Release -j$(nproc)
+        run: cmake --build build --config ${{ matrix.build_type.name }} -j$(nproc)
 
       - name: Test
-        run: cd build ; ctest -C Release -j$(nproc) --output-on-failure
+        run: cd build ; ctest -C ${{ matrix.build_type.name }} -j$(nproc) --output-on-failure
 
   macos:
     runs-on: macos-latest
     strategy:
       matrix:
-        build_type: [Debug, Release]
+        build_type:
+          - { name: "Release" }
+          - { name: "Debug" }
 
     steps:
       - uses: actions/checkout@v2
@@ -72,14 +76,16 @@ jobs:
 
       - name: Configure
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type.name }} \
           -DKLIB_BUILD_TESTS=ON
 
       - name: Build
-        run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
+        run: cmake --build build --config ${{ matrix.build_type.name }} -j`sysctl -n hw.ncpu`
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
 
       - name: Test
-        run: cd build ; ctest -C Release -j`sysctl -n hw.ncpu` --output-on-failure
+        run: |
+          cd build ; ctest -C ${{ matrix.build_type.name }} -j`sysctl -n hw.ncpu` \
+          --output-on-failure

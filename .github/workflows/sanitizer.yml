@@ -21,10 +21,10 @@ jobs:
           wget -q https://github.com/google/googletest/archive/release-1.10.0.zip
           unzip -q release-1.10.0.zip
           cd googletest-release-1.10.0
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_GMOCK=OFF \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_GMOCK=OFF \
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
-          cmake --build build --config RelWithDebInfo -j$(nproc)
-          sudo cmake --build build --config RelWithDebInfo --target install
+          cmake --build build --config Release -j$(nproc)
+          sudo cmake --build build --config Release --target install
         env:
           CC: clang-10
           CXX: clang++-10
@@ -57,20 +57,20 @@ jobs:
           wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip
           unzip -q llvmorg-10.0.1.zip
           cd llvm-project-llvmorg-10.0.1
-          cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
+          cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
           -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Thread
-          cmake --build build --config RelWithDebInfo -j$(nproc) --target cxx cxxabi
-          sudo cmake --build build --config RelWithDebInfo --target install-cxx install-cxxabi
+          cmake --build build --config Release -j$(nproc) --target cxx cxxabi
+          sudo cmake --build build --config Release --target install-cxx install-cxxabi
           cd ..
           wget -q https://github.com/google/googletest/archive/release-1.10.0.zip
           unzip -q release-1.10.0.zip
           cd googletest-release-1.10.0
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_GMOCK=OFF \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_GMOCK=OFF \
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF \
           -DCMAKE_C_FLAGS="-fsanitize=thread -stdlib=libc++" \
           -DCMAKE_CXX_FLAGS="-fsanitize=thread -stdlib=libc++"
-          cmake --build build --config RelWithDebInfo -j$(nproc)
-          sudo cmake --build build --config RelWithDebInfo --target install
+          cmake --build build --config Release -j$(nproc)
+          sudo cmake --build build --config Release --target install
         env:
           CC: clang-10
           CXX: clang++-10
@@ -101,20 +101,20 @@ jobs:
           wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip
           unzip -q llvmorg-10.0.1.zip
           cd llvm-project-llvmorg-10.0.1
-          cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
+          cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
           -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=MemoryWithOrigins
-          cmake --build build --config RelWithDebInfo -j$(nproc) --target cxx cxxabi
-          sudo cmake --build build --config RelWithDebInfo --target install-cxx install-cxxabi
+          cmake --build build --config Release -j$(nproc) --target cxx cxxabi
+          sudo cmake --build build --config Release --target install-cxx install-cxxabi
           cd ..
           wget -q https://github.com/google/googletest/archive/release-1.10.0.zip
           unzip -q release-1.10.0.zip
           cd googletest-release-1.10.0
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_GMOCK=OFF \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_GMOCK=OFF \
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF \
           -DCMAKE_C_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++" \
           -DCMAKE_CXX_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++"
-          cmake --build build --config RelWithDebInfo -j$(nproc)
-          sudo cmake --build build --config RelWithDebInfo --target install
+          cmake --build build --config Release -j$(nproc)
+          sudo cmake --build build --config Release --target install
         env:
           CC: clang-10
           CXX: clang++-10
@@ -145,10 +145,10 @@ jobs:
           wget -q https://github.com/google/googletest/archive/release-1.10.0.zip
           unzip -q release-1.10.0.zip
           cd googletest-release-1.10.0
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_GMOCK=OFF \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_GMOCK=OFF \
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF
-          cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`
-          sudo cmake --build build --config RelWithDebInfo --target install
+          cmake --build build --config Release -j`sysctl -n hw.ncpu`
+          sudo cmake --build build --config Release --target install
 
       - name: Configure
         run: |
@@ -181,20 +181,20 @@ jobs:
           wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip
           unzip -q llvmorg-10.0.1.zip
           cd llvm-project-llvmorg-10.0.1
-          cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
+          cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
           -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Thread
-          cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu` --target cxx cxxabi
-          sudo cmake --build build --config RelWithDebInfo --target install-cxx install-cxxabi
+          cmake --build build --config Release -j`sysctl -n hw.ncpu` --target cxx cxxabi
+          sudo cmake --build build --config Release --target install-cxx install-cxxabi
           cd ..
           wget -q https://github.com/google/googletest/archive/release-1.10.0.zip
           unzip -q release-1.10.0.zip
           cd googletest-release-1.10.0
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_GMOCK=OFF \
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_GMOCK=OFF \
           -DBUILD_SHARED_LIBS=ON -Dgtest_build_tests=OFF \
           -DCMAKE_C_FLAGS="-fsanitize=thread -stdlib=libc++" \
           -DCMAKE_CXX_FLAGS="-fsanitize=thread -stdlib=libc++"
-          cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`
-          sudo cmake --build build --config RelWithDebInfo --target install
+          cmake --build build --config Release -j`sysctl -n hw.ncpu`
+          sudo cmake --build build --config Release --target install
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include

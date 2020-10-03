@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
+        build_shared: [ON, OFF]
         config:
           - { name: "GCC", cc: "gcc-10", cxx: "g++-10" }
           - { name: "Clang", cc: "clang-10", cxx: "clang++-10" }
@@ -25,7 +26,7 @@ jobs:
           sudo apt install gcc-10 g++-10
 
       - name: Configure
-        run: cmake -S . -B build
+        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.build_shared }}
         env:
           CC: gcc-10
           CXX: g++-10
@@ -38,47 +39,6 @@ jobs:
 
       - name: Run executable
         run: executable
-
-      - name: Build examples
-        run: |
-          cd examples
-          cmake -S . -B build
-          cmake --build build --config Release -j$(nproc)
-        env:
-          CC: ${{ matrix.config.cc }}
-          CXX: ${{ matrix.config.cxx }}
-
-  ubuntu-shared:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        config:
-          - { name: "GCC", cc: "gcc-10", cxx: "g++-10" }
-          - { name: "Clang", cc: "clang-10", cxx: "clang++-10" }
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
-          sudo apt update
-          sudo apt install gcc-10 g++-10
-
-      - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_SHARED=ON
-        env:
-          CC: gcc-10
-          CXX: g++-10
-
-      - name: Build
-        run: cmake --build build --config Release -j$(nproc)
-
-      - name: Install
-        run: sudo cmake --build build --config Release --target install
-
-      - name: Run executable
-        run: sudo ldconfig ; executable
 
       - name: Build examples
         run: |
@@ -91,42 +51,15 @@ jobs:
 
   macos:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        build_shared: [ON, OFF]
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Configure
-        run: cmake -S . -B build
-
-      - name: Build
-        run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Install
-        run: sudo cmake --build build --config Release --target install
-
-      - name: Run executable
-        run: executable
-
-      - name: Build examples
-        run: |
-          cd examples
-          cmake -S . -B build
-          cmake --build build --config Release -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-  macos-shared:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_SHARED=ON
+        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.build_shared }}
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`

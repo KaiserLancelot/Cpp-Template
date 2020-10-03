@@ -1,4 +1,6 @@
 if(KLIB_INSTALL)
+  message(STATUS "Generate the install target")
+
   include(GNUInstallDirs)
 
   # ---------------------------------------------------------------------------------------

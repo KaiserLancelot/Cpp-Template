@@ -34,7 +34,7 @@ jobs:
           CXX: g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_TESTS=ON -DKLIB_CLANG_TIDY=ON
+        run: cmake -S . -B build -DKLIB_CLANG_TIDY=ON
         env:
           CC: gcc-10
           CXX: g++-10
@@ -67,7 +67,7 @@ jobs:
           sudo cmake --build build --config Release --target install
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_TESTS=ON -DKLIB_CLANG_TIDY=ON
+        run: cmake -S . -B build -DKLIB_CLANG_TIDY=ON
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
