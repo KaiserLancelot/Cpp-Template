@@ -14,6 +14,6 @@ if(KLIB_VALGRIND)
   add_test(
     NAME ${TESTS_EXECUTABLE}-valgrind
     COMMAND ${VALGRIND_EXECUTABLE} --error-exitcode=1 --track-origins=yes
-            --gen-suppressions=all --leak-check=full ${TESTS_EXECUTABLE}
+            --gen-suppressions=all --leak-check=full ./${TESTS_EXECUTABLE}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 endif()
