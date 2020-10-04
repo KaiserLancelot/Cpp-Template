@@ -43,13 +43,6 @@ jobs:
       - name: Build
         run: cmake --build build --config Release -j$(nproc)
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: clang-tidy-linux
-          path: build/clang-tidy.txt
-          if-no-files-found: error
-
   macos:
     runs-on: macos-latest
 
@@ -76,10 +69,3 @@ jobs:
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: clang-tidy-macos
-          path: build/clang-tidy.txt
-          if-no-files-found: error

@@ -92,4 +92,6 @@ https://kaiserlancelot.github.io/cpp-template/dev/bench/
 - https://clang.llvm.org/docs/ClangFormat.html
 - https://clang.llvm.org/extra/clang-tidy/
 - https://clang.llvm.org/extra/clang-tidy/checks/readability-identifier-naming.html
+- https://clang.llvm.org/extra/clang-tidy/checks/list.html
+- https://clang.llvm.org/docs/analyzer/checkers.html
 - https://www.doxygen.nl/manual/index.html
