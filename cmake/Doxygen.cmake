@@ -4,7 +4,6 @@ if(KLIB_BUILD_DOCS OR KLIB_BUILD_ALL)
   find_package(Doxygen REQUIRED)
 
   set(INPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/klib)
-  set(README_DIR ${CMAKE_CURRENT_SOURCE_DIR}/README.md)
   set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
