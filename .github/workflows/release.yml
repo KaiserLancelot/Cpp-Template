@@ -56,18 +56,7 @@ jobs:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
 
-      - name: Upload release asset(zip)
-        if: ${{ matrix.config.cxx == 'g++-10' }}
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Linux.zip
-          asset_name: klib-${{ env.RELEASE_VERSION }}-Linux.zip
-          asset_content_type: application/zip
-
-      - name: Upload release asset(deb)
+      - name: Upload release asset
         if: ${{ matrix.config.cxx == 'g++-10' }}
         uses: actions/upload-release-asset@v1
         env:
@@ -119,17 +108,7 @@ jobs:
       #     C_INCLUDE_PATH: /usr/local/include
       #     CPLUS_INCLUDE_PATH: /usr/local/include
 
-      - name: Upload release asset(zip)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.zip
-          asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.zip
-          asset_content_type: application/zip
-
-      - name: Upload release asset(pkg)
+      - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

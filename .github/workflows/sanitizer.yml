@@ -9,6 +9,11 @@ on:
 jobs:
   ubuntu-address-undefined:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        config:
+          - { cc: "gcc-10", cxx: "g++-10" }
+          - { cc: "clang-10", cxx: "clang++-10" }
 
     steps:
       - uses: actions/checkout@v2
@@ -27,16 +32,16 @@ jobs:
           sudo cmake --build build --config Release --target install
           sudo ldconfig
         env:
-          CC: clang-10
-          CXX: clang++-10
+          CC: gcc-10
+          CXX: g++-10
 
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER="Address;Undefined"
         env:
-          CC: clang-10
-          CXX: clang++-10
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j$(nproc)

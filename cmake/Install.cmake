@@ -111,11 +111,11 @@ if(KLIB_INSTALL)
 
   if(APPLE)
     set(CPACK_GENERATOR
-        "ZIP;productbuild"
+        "productbuild"
         CACHE STRING "Semicolon separated list of generators")
   else()
     set(CPACK_GENERATOR
-        "ZIP;DEB"
+        "DEB"
         CACHE STRING "Semicolon separated list of generators")
 
     set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)

@@ -11,7 +11,7 @@ option(KLIB_BUILD_SHARED "Build shared library" OFF)
 option(KLIB_BUILD_ALL
        "Build all executable, tests, benchmarks, documentations and coverage"
        OFF)
-option(KLIB_BUILD_EXECUTABLE "Build executable" ON)
+option(KLIB_BUILD_EXECUTABLE "Build executable" ${KLIB_MASTER_PROJECT})
 option(KLIB_BUILD_TESTS "Build tests" OFF)
 option(KLIB_BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(KLIB_BUILD_DOCS "Build documentations" OFF)
