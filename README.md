@@ -88,7 +88,6 @@ https://kaiserlancelot.github.io/cpp-template/dev/bench/
 
 - https://www.valgrind.org/docs/manual/manual.html
 - https://github.com/cheshirekow/cmake_format
-- https://clangd.llvm.org/
 - https://clang.llvm.org/docs/ClangFormat.html
 - https://clang.llvm.org/extra/clang-tidy/
 - https://clang.llvm.org/extra/clang-tidy/checks/readability-identifier-naming.html
