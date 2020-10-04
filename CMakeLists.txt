@@ -12,6 +12,9 @@ project(
 
 message(STATUS "Build ${PROJECT_NAME}: ${KLIB_VERSION}")
 
+include(CTest)
+include(GNUInstallDirs)
+
 include(Options)
 include(Check)
 include(ClangTidy)
@@ -51,7 +54,6 @@ if(NOT KLIB_BUILD_SHARED)
   include(LTO)
 endif()
 
-include(GNUInstallDirs)
 target_include_directories(
   ${LIBRARY} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
@@ -74,7 +76,6 @@ endif()
 # ---------------------------------------------------------------------------------------
 # Build tests
 # ---------------------------------------------------------------------------------------
-include(CTest)
 if(BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL))
   message(STATUS "Build tests")
 

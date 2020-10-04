@@ -1,11 +1,4 @@
 if(KLIB_VALGRIND)
-  if(NOT (BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL)))
-    message(
-      FATAL_ERROR
-        "Need to build tests, pass -DKLIB_BUILD_TESTS=ON or -DKLIB_BUILD_ALL=ON"
-    )
-  endif()
-
   if(APPLE)
     message(FATAL_ERROR "macOS does not support valgrind")
   endif()
