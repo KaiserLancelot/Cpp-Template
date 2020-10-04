@@ -62,7 +62,7 @@ jobs:
         if: ${{ matrix.config.cxx == 'clang++-10' }}
         uses: actions/upload-artifact@v2
         with:
-          name: coverage-linux-gcc
+          name: coverage-linux-clang
           path: build/coverage
           if-no-files-found: error
 
