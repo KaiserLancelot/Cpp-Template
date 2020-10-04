@@ -25,19 +25,6 @@
 var NAVTREE =
 [
   [ "klib", "index.html", [
-    [ "cpp-template", "md_README.html", [
-      [ "Build", "md_README.html#autotoc_md1", null ],
-      [ "Install", "md_README.html#autotoc_md2", null ],
-      [ "Usage with CMake", "md_README.html#autotoc_md3", null ],
-      [ "Benchmark", "md_README.html#autotoc_md4", null ],
-      [ "Reference", "md_README.html#autotoc_md5", [
-        [ "Github Action", "md_README.html#autotoc_md6", null ],
-        [ "CMake", "md_README.html#autotoc_md7", null ],
-        [ "Coverage", "md_README.html#autotoc_md8", null ],
-        [ "Sanitizer", "md_README.html#autotoc_md9", null ],
-        [ "Tools", "md_README.html#autotoc_md10", null ]
-      ] ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
