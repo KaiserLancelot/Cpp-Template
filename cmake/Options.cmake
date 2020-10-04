@@ -30,9 +30,9 @@ endif()
 include(CMakeDependentOption)
 cmake_dependent_option(
   KLIB_BUILD_COVERAGE "Build tests with coverage information" OFF
-  "KLIB_BUILD_TESTS" OFF)
+  "BUILD_TESTING;KLIB_BUILD_TESTS OR KLIB_BUILD_ALL" OFF)
 cmake_dependent_option(KLIB_VALGRIND "Execute tests with valgrind" OFF
-                       "KLIB_BUILD_TESTS" OFF)
+                       "BUILD_TESTING;KLIB_BUILD_TESTS OR KLIB_BUILD_ALL" OFF)
 
 set(KLIB_SANITIZER
     ""

@@ -1,4 +1,11 @@
 if(KLIB_BUILD_COVERAGE OR KLIB_BUILD_ALL)
+  if(NOT (BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL)))
+    message(
+      FATAL_ERROR
+        "Need to build tests, pass -DKLIB_BUILD_TESTS=ON or -DKLIB_BUILD_ALL=ON"
+    )
+  endif()
+
   include(AddCompilerFlag)
 
   if(CMAKE_COMPILER_IS_GNUCXX)
