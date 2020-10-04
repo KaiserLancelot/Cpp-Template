@@ -1,5 +1,7 @@
-/// \file bar.h
-/// \brief Contains the declaration of the class Bar
+/**
+ * @file bar.h
+ * @brief Contains the declaration of the class Bar
+ */
 
 #pragma once
 
@@ -7,18 +9,26 @@
 
 namespace klib {
 
-/// test struct bar
+/**
+ * @brief A test struct
+ */
 class Bar {
  public:
-  /// Default constructor
+  /**
+   * @brief Construct a new Bar object
+   */
   Bar() = default;
 
-  /// \brief A constructor
-  /// \param val Used to initialize members
+  /**
+   * @brief Construct a new Bar object
+   * @param val Used to initialize members
+   */
   explicit Bar(std::int32_t val);
 
-  /// \brief A member fun
-  /// \return return val
+  /**
+   * @brief Get the val object
+   * @return Return val
+   */
   [[nodiscard]] std::int32_t get_val() const;
 
  private:

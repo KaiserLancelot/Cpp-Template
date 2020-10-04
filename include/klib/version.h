@@ -1,15 +1,27 @@
-/// \file version.h
-/// \brief Contains the declaration of the macro
+/**
+ * @file version.h
+ * @brief Contains the declaration of the macro
+ */
 
 #pragma once
 
-/// klib major verion
+/**
+ * @brief klib major verion
+ */
 #define KLIB_VER_MAJOR 2
-/// klib minor version
-#define KLIB_VER_MINOR 4
-/// klib patch version
-#define KLIB_VER_PATCH 4
 
-/// klib version
+/**
+ * @brief klib minor version
+ */
+#define KLIB_VER_MINOR 4
+
+/**
+ * @brief klib patch version
+ */
+#define KLIB_VER_PATCH 6
+
+/**
+ * @brief klib version
+ */
 #define KLIB_VERSION \
   (KLIB_VER_MAJOR * 10000 + KLIB_VER_MINOR * 100 + KLIB_VER_PATCH)
