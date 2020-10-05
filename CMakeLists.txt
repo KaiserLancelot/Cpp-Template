@@ -50,6 +50,7 @@ if(KLIB_BUILD_STATIC)
   list(APPEND LIBRARY_TARGETS ${LIBRARY})
 
   add_library(${LIBRARY} STATIC ${LIBRARY_SRC})
+  add_library(${LIBRARY}::${LIBRARY} ALIAS ${LIBRARY})
 
   target_include_directories(
     ${LIBRARY} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
@@ -74,6 +75,7 @@ if(KLIB_BUILD_SHARED)
   list(APPEND LIBRARY_TARGETS ${LIBRARY}-shared)
 
   add_library(${LIBRARY}-shared SHARED ${LIBRARY_SRC})
+  add_library(${LIBRARY}::${LIBRARY}-shared ALIAS ${LIBRARY}-shared)
 
   target_include_directories(
     ${LIBRARY}-shared
