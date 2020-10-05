@@ -3,6 +3,5 @@
     "-DKLIB_BUILD_ALL=ON",
     "-DKLIB_FORMAT=ON",
     "-DKLIB_SANITIZER=Address;Undefined"
-  ],
-  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json"
+  ]
 }

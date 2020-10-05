@@ -11,10 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        options:
-          - { build_shared: "ON", use_add_sub: "OFF" }
-          - { build_shared: "OFF", use_add_sub: "OFF" }
-          - { build_shared: "OFF", use_add_sub: "ON" }
+        use_add_sub: ["ON", "OFF"]
         config:
           - { cc: "gcc-10", cxx: "g++-10" }
           - { cc: "clang-10", cxx: "clang++-10" }
@@ -29,7 +26,7 @@ jobs:
           sudo apt install gcc-10 g++-10
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.options.build_shared }}
+        run: cmake -S . -B build
         env:
           CC: gcc-10
           CXX: g++-10
@@ -50,7 +47,7 @@ jobs:
           cp -r examples ../
           cd ../examples
           cp -r ../cpp-template .
-          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.options.use_add_sub }}
+          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.use_add_sub }}
           cmake --build build --config Release -j$(nproc)
         env:
           CC: ${{ matrix.config.cc }}
@@ -60,16 +57,13 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        options:
-          - { build_shared: "ON", use_add_sub: "OFF" }
-          - { build_shared: "OFF", use_add_sub: "OFF" }
-          - { build_shared: "OFF", use_add_sub: "ON" }
+        use_add_sub: ["ON", "OFF"]
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_SHARED=${{ matrix.options.build_shared }}
+        run: cmake -S . -B build
 
       - name: Build
         run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
@@ -90,7 +84,7 @@ jobs:
           cp -r examples ../
           cd ../examples
           cp -r ../cpp-template .
-          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.options.use_add_sub }}
+          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.use_add_sub }}
           cmake --build build --config Release -j`sysctl -n hw.ncpu`
         env:
           C_INCLUDE_PATH: /usr/local/include

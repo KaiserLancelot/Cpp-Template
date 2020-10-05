@@ -1,5 +1,6 @@
 # https://github.com/gabime/spdlog/blob/v1.x/CMakeLists.txt
 # https://github.com/gabime/spdlog/blob/v1.x/cmake/spdlogCPack.cmake
+# https://github.com/facebook/zstd/blob/dev/build/cmake/lib/CMakeLists.txt
 if(KLIB_INSTALL)
   message(STATUS "Generate the install target")
 
@@ -30,8 +31,8 @@ if(KLIB_INSTALL)
   # ---------------------------------------------------------------------------------------
   install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
   install(
-    TARGETS ${LIBRARY}
-    EXPORT ${LIBRARY}
+    TARGETS ${LIBRARY_TARGETS}
+    EXPORT KLIBEXPORTS
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -43,7 +44,7 @@ if(KLIB_INSTALL)
   set(KLIB_CONFIG_TARGETS_FILE "${LIBRARY}ConfigTargets.cmake")
 
   install(
-    EXPORT ${LIBRARY}
+    EXPORT KLIBEXPORTS
     DESTINATION ${KLIB_EXPORT_DEST_DIR}
     NAMESPACE ${LIBRARY}::
     FILE ${KLIB_CONFIG_TARGETS_FILE})

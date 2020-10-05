@@ -15,7 +15,7 @@ namespace klib {
 class Bar {
  public:
   /**
-   * @brief Construct a new Bar object
+   * @brief Default Constructor
    */
   Bar() = default;
 

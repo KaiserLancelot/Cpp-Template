@@ -6,7 +6,8 @@ if(NOT DEFINED KLIB_MASTER_PROJECT)
   endif()
 endif()
 
-option(KLIB_BUILD_SHARED "Build shared library" OFF)
+option(KLIB_BUILD_STATIC "Build static library" ON)
+option(KLIB_BUILD_SHARED "Build shared library" ON)
 
 option(KLIB_BUILD_ALL
        "Build all executable, tests, benchmarks, documentations and coverage"

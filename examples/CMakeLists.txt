@@ -75,9 +75,13 @@ foreach(FILE_PATH ${SRC})
   add_executable(${FILE_NAME} ${FILE_PATH})
   target_link_libraries(${FILE_NAME} PRIVATE klib::klib)
 
+  add_executable(${FILE_NAME}-shared ${FILE_PATH})
+  target_link_libraries(${FILE_NAME}-shared PRIVATE klib::klib-shared)
+
   add_custom_target(
     run-${FILE_NAME} ALL
     COMMAND ${FILE_NAME}
+    COMMAND ${FILE_NAME}-shared
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     DEPENDS ${FILE_NAME}
     COMMENT "Run ${FILE_NAME}")

@@ -6,6 +6,7 @@
 
 #include "klib/add.h"
 #include "klib/bar.h"
+#include "klib/version.h"
 
 int main() {
   std::vector<std::int32_t> v;
@@ -22,4 +23,5 @@ int main() {
 
   std::cout << klib::add(1, 2) << '\n';
   std::cout << klib::Bar{42}.get_val() << '\n';
+  std::cout << KLIB_VERSION << '\n';
 }
