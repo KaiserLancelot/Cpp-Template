@@ -11,13 +11,8 @@ source $(dirname "$0")/install-system.sh
 
 cd dependencies
 
-# FIXME
-ls
-
 if [ -d llvm-project-llvmorg-* ]; then
     cd llvm-project-llvmorg-*
-    # FIXME
-    ls
     sudo cmake --build build --config Release --target install-cxx install-cxxabi
     cd ..
     echo "Install libc++ completed"
