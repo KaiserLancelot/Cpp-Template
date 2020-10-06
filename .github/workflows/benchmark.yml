@@ -7,7 +7,7 @@ on:
     - cron: "0 0 1 * *"
 
 jobs:
-  linux:
+  build:
     runs-on: ubuntu-20.04
 
     steps:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
+          key: ${{ runner.os }}-dependencies-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -48,7 +48,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: rhysd/github-action-benchmark@v1
         with:
-          name: C++ Benchmark(Linux)
+          name: C++ Benchmark
           tool: "googlecpp"
           output-file-path: benchmark-result.json
           fail-on-alert: false
@@ -61,67 +61,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: benchmark-linux
-          path: benchmark-result.txt
-          if-no-files-found: error
-
-  macos:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_BENCHMARKS=ON
-
-      - name: Build
-        run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Run benchmark(json)
-        if: ${{ github.event_name == 'push' }}
-        run: ./build/benchmark --benchmark_out=benchmark-result.json --benchmark_out_format=json
-
-      - name: Run benchmark(txt)
-        run: ./build/benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
-
-      - name: Store benchmark result
-        if: ${{ github.event_name == 'push' }}
-        uses: rhysd/github-action-benchmark@v1
-        with:
-          name: C++ Benchmark(macOS)
-          tool: "googlecpp"
-          output-file-path: benchmark-result.json
-          fail-on-alert: false
-          alert-threshold: "110%"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          comment-on-alert: true
-          alert-comment-cc-users: "@KaiserLancelot"
-          auto-push: true
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: benchmark-macos
+          name: benchmark
           path: benchmark-result.txt
           if-no-files-found: error

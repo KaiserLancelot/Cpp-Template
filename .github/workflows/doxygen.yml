@@ -5,7 +5,7 @@ on:
     types: published
 
 jobs:
-  linux:
+  build:
     runs-on: ubuntu-20.04
 
     steps:
@@ -16,7 +16,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
+          key: ${{ runner.os }}-dependencies-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -41,31 +41,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/html
           keep_files: true
-
-  macos:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Install dependencies
-        run: brew install doxygen
-
-      - name: Configure
-        run: cmake -S . -B build -DKLIB_BUILD_DOCS=ON
-
-      - name: Build
-        run: cmake --build build --config Release --target doc
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: doxygen-macos
-          path: build/html
-          if-no-files-found: error

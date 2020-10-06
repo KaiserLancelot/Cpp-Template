@@ -7,7 +7,7 @@ on:
     - cron: "0 0 1 * *"
 
 jobs:
-  linux-address-undefined:
+  address-undefined:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
+          key: ${{ runner.os }}-dependencies-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -50,7 +50,7 @@ jobs:
           ASAN_OPTIONS: detect_stack_use_after_return=1
           UBSAN_OPTIONS: print_stacktrace=1
 
-  linux-thread:
+  thread:
     runs-on: ubuntu-20.04
 
     steps:
@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-thread-20201006-6
+          key: ${{ runner.os }}-dependencies-thread-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -85,7 +85,7 @@ jobs:
       - name: Test
         run: cd build ; ctest -C RelWithDebInfo -j$(nproc) --output-on-failure
 
-  linux-memory:
+  memory:
     runs-on: ubuntu-20.04
 
     steps:
@@ -96,7 +96,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-memory-20201006-6
+          key: ${{ runner.os }}-dependencies-memory-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -119,85 +119,3 @@ jobs:
 
       - name: Test
         run: cd build ; ctest -C RelWithDebInfo -j$(nproc) --output-on-failure
-
-  macos-address-undefined:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Configure
-        run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER="Address;Undefined"
-
-      - name: Build
-        run: cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Test
-        run: cd build ; ctest -C RelWithDebInfo -j`sysctl -n hw.ncpu` --output-on-failure
-        env:
-          # TODO AppleClang does not support LeakSanitizer, consider using clang
-          # ASAN_OPTIONS: detect_leaks=1
-          ASAN_OPTIONS: detect_stack_use_after_return=1
-          UBSAN_OPTIONS: print_stacktrace=1
-
-  # TODO Check if it is correct
-  macos-thread:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-thread-20201006-6
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh -t
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Configure
-        run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
-
-      - name: Build
-        run: cmake --build build --config RelWithDebInfo -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Test
-        run: cd build ; ctest -C RelWithDebInfo -j`sysctl -n hw.ncpu` --output-on-failure

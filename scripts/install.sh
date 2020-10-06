@@ -28,24 +28,18 @@ sudo cmake --build build --config Release --target install
 cd ..
 echo "Install google test completed"
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    cd lcov-*
-    sudo make install
-    cd ..
-    echo "Install lcov completed"
+cd lcov-*
+sudo make install
+cd ..
+echo "Install lcov completed"
 
-    cd doxygen-Release_*
-    sudo cmake --build build --config Release --target install
-    cd ..
-    echo "Install doxygen completed"
-fi
+cd doxygen-Release_*
+sudo cmake --build build --config Release --target install
+cd ..
+echo "Install doxygen completed"
 
 cd ..
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo ldconfig
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    sudo update_dyld_shared_cache
-fi
+sudo ldconfig
 
 echo "Install completed"

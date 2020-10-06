@@ -86,8 +86,7 @@ foreach(FILE_PATH ${SRC})
     DEPENDS ${FILE_NAME}
     COMMENT "Run ${FILE_NAME}")
 
-  # FIXME Cannot find header file on macos
-  if(NOT (APPLE OR EXAMPLES_USE_ADD_SUBDIRECTORY))
+  if(NOT EXAMPLES_USE_ADD_SUBDIRECTORY)
     add_custom_target(
       run-${FILE_NAME}-pkg-config ALL
       COMMAND

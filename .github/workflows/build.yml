@@ -7,7 +7,7 @@ on:
     - cron: "0 0 1 * *"
 
 jobs:
-  linux:
+  build:
     # TODO Use ubuntu-latest
     # https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners
     runs-on: ubuntu-20.04
@@ -28,7 +28,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
+          key: ${{ runner.os }}-dependencies-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -51,48 +51,3 @@ jobs:
 
       - name: Test
         run: cd build ; ctest -C ${{ matrix.build_type.name }} -j$(nproc) --output-on-failure
-
-  macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        build_type:
-          - { name: "Release" }
-          - { name: "Debug" }
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Configure
-        run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type.name }} \
-          -DKLIB_BUILD_TESTS=ON
-
-      - name: Build
-        run: cmake --build build --config ${{ matrix.build_type.name }} -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Test
-        run: |
-          cd build ; ctest -C ${{ matrix.build_type.name }} -j`sysctl -n hw.ncpu` \
-          --output-on-failure

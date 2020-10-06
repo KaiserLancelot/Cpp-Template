@@ -7,7 +7,7 @@ on:
     - cron: "0 0 1 * *"
 
 jobs:
-  linux:
+  build:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
+          key: ${{ runner.os }}-dependencies-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -55,48 +55,6 @@ jobs:
         if: ${{ matrix.config.cxx == 'clang++-10' }}
         uses: actions/upload-artifact@v2
         with:
-          name: coverage-linux-clang
-          path: build/coverage
-          if-no-files-found: error
-
-  macos:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Configure
-        run: |
-          cmake -S . -B build -DKLIB_BUILD_TESTS=ON -DKLIB_BUILD_COVERAGE=ON \
-          -DCMAKE_BUILD_TYPE=Debug
-
-      - name: Build
-        run: cmake --build build --config Debug -j`sysctl -n hw.ncpu` --target coverage
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-macos
+          name: coverage-clang
           path: build/coverage
           if-no-files-found: error

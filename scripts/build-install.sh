@@ -24,14 +24,12 @@ if $thread && $memory; then
     exit 1
 fi
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if $thread || $memory; then
-        export CC=clang-10
-        export CXX=clang++-10
-    else
-        export CC=gcc-10
-        export CXX=g++-10
-    fi
+if $thread || $memory; then
+    export CC=clang-10
+    export CXX=clang++-10
+else
+    export CC=gcc-10
+    export CXX=g++-10
 fi
 
 source $(dirname "$0")/install-system.sh
@@ -72,11 +70,6 @@ if $thread || $memory; then
     sudo cmake --build build --config Release --target install-cxx install-cxxabi
 
     cd ..
-
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        export C_INCLUDE_PATH=/usr/local/include
-        export CPLUS_INCLUDE_PATH=/usr/local/include
-    fi
 fi
 
 # google benchmark
@@ -116,43 +109,37 @@ sudo cmake --build build --config Release --target install
 
 cd ..
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # lcov
-    if [ ! -f "lcov-1.15.zip" ]; then
-        wget -q https://github.com/linux-test-project/lcov/archive/v1.15.zip -O lcov-1.15.zip
-    else
-        echo "Build lcov"
-    fi
-    unzip -q lcov-*.zip
-    rm lcov-*.zip
-    cd lcov-*
-    sudo make install
-
-    cd ..
-
-    # doxygen
-    if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
-        wget -q https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
-            -O doxygen-Release_1_8_20.zip
-    else
-        echo "Build doxygen"
-    fi
-    unzip -q doxygen-Release_*.zip
-    rm doxygen-Release_*.zip
-    cd doxygen-Release_*
-    cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
-    cmake --build build --config Release -j$PARALLEL
-    sudo cmake --build build --config Release --target install
-
-    cd ..
+# lcov
+if [ ! -f "lcov-1.15.zip" ]; then
+    wget -q https://github.com/linux-test-project/lcov/archive/v1.15.zip -O lcov-1.15.zip
+else
+    echo "Build lcov"
 fi
+unzip -q lcov-*.zip
+rm lcov-*.zip
+cd lcov-*
+sudo make install
 
 cd ..
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo ldconfig
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    sudo update_dyld_shared_cache
+# doxygen
+if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
+    wget -q https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
+        -O doxygen-Release_1_8_20.zip
+else
+    echo "Build doxygen"
 fi
+unzip -q doxygen-Release_*.zip
+rm doxygen-Release_*.zip
+cd doxygen-Release_*
+cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release -j$PARALLEL
+sudo cmake --build build --config Release --target install
+
+cd ..
+
+cd ..
+
+sudo ldconfig
 
 echo "Build and install google benchmark completed"

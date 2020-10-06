@@ -5,7 +5,7 @@ on:
     types: published
 
 jobs:
-  linux:
+  build:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
+          key: ${{ runner.os }}-dependencies-20201010
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -75,72 +75,3 @@ jobs:
           asset_path: build/klib-${{ env.RELEASE_VERSION }}-Linux.deb
           asset_name: klib-${{ env.RELEASE_VERSION }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
-
-  macos:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Update
-        run: brew install ninja
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-6
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::${TAG_NAME:1}
-        env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
-
-      - name: Configure
-        run: cmake -S . -B build
-
-      - name: Build
-        run: cmake --build build --config Release -j`sysctl -n hw.ncpu`
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: CPack
-        run: cd build ; cpack
-
-      # FIXME Packaging configuration error. Modify TheCPack.cmake
-      # - name: Install
-      #   run: |
-      #     sudo installer -pkg build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg -target /
-      #     sudo update_dyld_shared_cache
-
-      # - name: Run executable
-      #   run: executable
-
-      # - name: Build examples
-      #   run: |
-      #     cd examples
-      #     cmake -S . -B build
-      #     cmake --build build --config Release -j`sysctl -n hw.ncpu`
-      #   env:
-      #     C_INCLUDE_PATH: /usr/local/include
-      #     CPLUS_INCLUDE_PATH: /usr/local/include
-
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: build/klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
-          asset_name: klib-${{ env.RELEASE_VERSION }}-Darwin.pkg
-          asset_content_type: application/x-newton-compatible-pkg

@@ -22,11 +22,7 @@ option(KLIB_CLANG_TIDY "Analyze code with clang-tidy" OFF)
 
 option(KLIB_INSTALL "Generate the install target" ${KLIB_MASTER_PROJECT})
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-  option(KLIB_USE_LIBCXX "Use libc++" ON)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  option(KLIB_USE_LIBCXX "Use libc++" OFF)
-endif()
+option(KLIB_USE_LIBCXX "Use libc++" OFF)
 
 include(CMakeDependentOption)
 cmake_dependent_option(

@@ -110,20 +110,14 @@ if(KLIB_INSTALL)
       ON
       CACHE BOOL "Build relocatable package")
 
-  if(APPLE)
-    set(CPACK_GENERATOR
-        "productbuild"
-        CACHE STRING "Semicolon separated list of generators")
-  else()
-    set(CPACK_GENERATOR
-        "DEB"
-        CACHE STRING "Semicolon separated list of generators")
+  set(CPACK_GENERATOR
+      "DEB"
+      CACHE STRING "Semicolon separated list of generators")
 
-    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+  set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
-    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS "")
-    include(InstallRequiredSystemLibraries)
-  endif()
+  set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS "")
+  include(InstallRequiredSystemLibraries)
 
   include(CPack)
 endif()

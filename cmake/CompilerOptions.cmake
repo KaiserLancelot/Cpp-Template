@@ -23,9 +23,8 @@ if(KLIB_USE_LIBCXX)
   add_cxx_compiler_flag("-stdlib=libc++")
 
   # https://blog.jetbrains.com/clion/2019/10/clion-2019-3-eap-debugger-improvements/
-  if(((CMAKE_BUILD_TYPE STREQUAL "Debug") OR (CMAKE_BUILD_TYPE STREQUAL
-                                              "RelWithDebInfo"))
-     AND (CMAKE_SYSTEM_NAME STREQUAL "Linux"))
+  if((CMAKE_BUILD_TYPE STREQUAL "Debug") OR (CMAKE_BUILD_TYPE STREQUAL
+                                             "RelWithDebInfo"))
     add_compiler_flag("-fstandalone-debug")
   endif()
 endif()

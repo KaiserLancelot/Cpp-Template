@@ -1,8 +1,4 @@
 if(KLIB_VALGRIND)
-  if(APPLE)
-    message(FATAL_ERROR "macOS does not support valgrind")
-  endif()
-
   message(STATUS "Execute tests with valgrind")
 
   find_program(VALGRIND_EXECUTABLE valgrind)

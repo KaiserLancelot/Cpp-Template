@@ -15,7 +15,7 @@ if(KLIB_SANITIZER)
     add_compiler_flag("-fsanitize=undefined")
     add_compiler_flag("-fno-sanitize-recover=all")
 
-    if(CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?Clang")
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
       add_compiler_flag("-fsanitize=float-divide-by-zero")
       add_compiler_flag("-fsanitize=unsigned-integer-overflow")
       add_compiler_flag("-fsanitize=implicit-conversion")
@@ -27,11 +27,6 @@ if(KLIB_SANITIZER)
 
   if(KLIB_SANITIZER STREQUAL "Address")
     message(STATUS "Build with AddressSanitizer")
-
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-      message(WARNING "AppleClang does not support LeakSanitizer")
-    endif()
-
     append_address_sanitizer_flags()
   elseif(KLIB_SANITIZER STREQUAL "Thread")
     message(STATUS "Build with ThreadSanitizer")
@@ -39,10 +34,6 @@ if(KLIB_SANITIZER)
   elseif(KLIB_SANITIZER STREQUAL "Memory")
     if(CMAKE_COMPILER_IS_GNUCXX)
       message(FATAL_ERROR "GCC does not support MemorySanitizer")
-    endif()
-
-    if(APPLE)
-      message(FATAL_ERROR "macOS does not support MemorySanitizer")
     endif()
 
     message(STATUS "Build with MemorySanitizer")
