@@ -7,7 +7,7 @@ if [ ! -d "dependencies" ]; then
     exit 1
 fi
 
-source install-system.sh
+source $(dirname "$0")/install-system.sh
 
 cd dependencies
 
