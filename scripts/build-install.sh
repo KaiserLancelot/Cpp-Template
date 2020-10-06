@@ -109,20 +109,20 @@ sudo cmake --build build --config Release --target install
 
 cd ..
 
-# lcov
-if [ ! -f "lcov-1.15.zip" ]; then
-    wget https://github.com/linux-test-project/lcov/archive/v1.15.zip -O lcov-1.15.zip
-else
-    echo "Build lcov"
-fi
-unzip -q lcov-*.zip
-rm lcov-*.zip
-cd lcov-*
-sudo make install
-
-cd ..
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # lcov
+    if [ ! -f "lcov-1.15.zip" ]; then
+        wget https://github.com/linux-test-project/lcov/archive/v1.15.zip -O lcov-1.15.zip
+    else
+        echo "Build lcov"
+    fi
+    unzip -q lcov-*.zip
+    rm lcov-*.zip
+    cd lcov-*
+    sudo make install
+
+    cd ..
+
     # doxygen
     if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
         wget https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
@@ -136,9 +136,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
     cmake --build build --config Release -j$PARALLEL
     sudo cmake --build build --config Release --target install
-fi
 
-cd ..
+    cd ..
+fi
 
 cd ..
 

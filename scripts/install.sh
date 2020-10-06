@@ -27,12 +27,11 @@ sudo cmake --build build --config Release --target install
 
 cd ..
 
-cd lcov-*
-sudo make install
-
-cd ..
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    cd lcov-*
+    sudo make install
+    cd ..
+
     cd doxygen-Release_*
     sudo cmake --build build --config Release --target install
     cd ..
