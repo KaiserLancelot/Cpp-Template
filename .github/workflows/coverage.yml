@@ -35,8 +35,8 @@ jobs:
 
       - name: Configure
         run: |
-          cmake -S . -B build -DKLIB_BUILD_TESTS=ON -DKLIB_BUILD_COVERAGE=ON \
-          -DCMAKE_BUILD_TYPE=Debug
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug \
+          -DKLIB_BUILD_TESTS=ON -DKLIB_BUILD_COVERAGE=ON
         env:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
