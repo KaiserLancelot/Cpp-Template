@@ -24,12 +24,14 @@ if $thread && $memory; then
     exit 1
 fi
 
-if $thread || $memory; then
-    export CC=clang-10
-    export CXX=clang++-10
-else
-    export CC=gcc-10
-    export CXX=g++-10
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if $thread || $memory; then
+        export CC=clang-10
+        export CXX=clang++-10
+    else
+        export CC=gcc-10
+        export CXX=g++-10
+    fi
 fi
 
 source $(dirname "$0")/install-system.sh
