@@ -11,20 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: dependencies
+          key: ${{ runner.os }}-dependencies-20201006
+
+      - name: Build and install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: sudo bash ./scripts/build-install.sh
+
       - name: Install dependencies
-        run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
-          sudo apt update
-          sudo apt install gcc-10 g++-10 flex bison
-          wget -q https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip
-          unzip -q Release_1_8_20.zip
-          cd doxygen-Release_1_8_20
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-          cmake --build build --config Release -j$(nproc)
-          sudo cmake --build build --config Release --target install
-        env:
-          CC: gcc-10
-          CXX: g++-10
+        if: steps.cache-dependencies.outputs.cache-hit == 'true'
+        run: sudo bash ./scripts/install.sh
 
       - name: Configure
         run: cmake -S . -B build -DKLIB_BUILD_DOCS=ON

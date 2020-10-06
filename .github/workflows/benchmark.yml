@@ -13,24 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: dependencies
+          key: ${{ runner.os }}-dependencies-20201006
+
+      - name: Build and install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: sudo bash ./scripts/build-install.sh
+
       - name: Install dependencies
-        run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
-          sudo apt update
-          sudo apt install gcc-10 g++-10
-          wget -q https://github.com/google/benchmark/archive/v1.5.2.zip
-          unzip -q v1.5.2.zip
-          cd benchmark-1.5.2
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
-          -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_ENABLE_LTO=ON \
-          -DBENCHMARK_USE_LIBCXX=OFF -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
-          -DBENCHMARK_ENABLE_ASSEMBLY_TESTS=OFF -DBUILD_SHARED_LIBS=ON
-          cmake --build build --config Release -j$(nproc)
-          sudo cmake --build build --config Release --target install
-          sudo ldconfig
-        env:
-          CC: gcc-10
-          CXX: g++-10
+        if: steps.cache-dependencies.outputs.cache-hit == 'true'
+        run: sudo bash ./scripts/install.sh
 
       - name: Configure
         run: cmake -S . -B build -DKLIB_BUILD_BENCHMARKS=ON
@@ -75,21 +71,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: dependencies
+          key: ${{ runner.os }}-dependencies-20201006
+
+      - name: Build and install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: sudo bash ./scripts/build-install.sh
+
       - name: Install dependencies
-        run: |
-          ln -s "$(brew --prefix llvm)/bin/llvm-ar" "/usr/local/bin/llvm-ar"
-          ln -s "$(brew --prefix llvm)/bin/llvm-nm" "/usr/local/bin/llvm-nm"
-          ln -s "$(brew --prefix llvm)/bin/llvm-ranlib" "/usr/local/bin/llvm-ranlib"
-          wget -q https://github.com/google/benchmark/archive/v1.5.2.zip
-          unzip -q v1.5.2.zip
-          cd benchmark-1.5.2
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
-          -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_ENABLE_LTO=ON \
-          -DBENCHMARK_USE_LIBCXX=OFF -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
-          -DBENCHMARK_ENABLE_ASSEMBLY_TESTS=OFF -DBUILD_SHARED_LIBS=ON
-          cmake --build build --config Release -j`sysctl -n hw.ncpu`
-          sudo cmake --build build --config Release --target install
-          sudo update_dyld_shared_cache
+        if: steps.cache-dependencies.outputs.cache-hit == 'true'
+        run: sudo bash ./scripts/install.sh
 
       - name: Configure
         run: cmake -S . -B build -DKLIB_BUILD_BENCHMARKS=ON
