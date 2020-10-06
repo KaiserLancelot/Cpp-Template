@@ -14,6 +14,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     PARALLEL=$(nproc)
 else
-    echo "The system does not support"
+    echo "The system does not support: $OSTYPE"
     exit 1
 fi
