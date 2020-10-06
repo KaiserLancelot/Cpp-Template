@@ -16,8 +16,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     echo "System: $OSTYPE"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    brew update
-
     ln -s "$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
     ln -s "$(brew --prefix llvm)/bin/llvm-cov" "/usr/local/bin/llvm-cov"
     ln -s "$(brew --prefix llvm)/bin/llvm-profdata" "/usr/local/bin/llvm-profdata"
