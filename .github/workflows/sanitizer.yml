@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-4
+          key: ${{ runner.os }}-dependencies-20201006-5
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-thread-20201006-4
+          key: ${{ runner.os }}-dependencies-thread-20201006-5
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -96,7 +96,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-memory-20201006-4
+          key: ${{ runner.os }}-dependencies-memory-20201006-5
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -126,12 +126,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Update
+        run: brew update
+
       - name: Cache dependencies
         id: cache-dependencies
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-4
+          key: ${{ runner.os }}-dependencies-20201006-5
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -139,9 +142,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: |
-          brew update
-          sudo bash ./scripts/install.sh
+        run: sudo bash ./scripts/install.sh
 
       - name: Configure
         run: |
@@ -169,12 +170,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Update
+        run: brew update
+
       - name: Cache dependencies
         id: cache-dependencies
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-thread-20201006-4
+          key: ${{ runner.os }}-dependencies-thread-20201006-5
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -182,9 +186,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: |
-          brew update
-          sudo bash ./scripts/install.sh
+        run: sudo bash ./scripts/install.sh
 
       - name: Configure
         run: |

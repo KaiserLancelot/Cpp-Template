@@ -16,7 +16,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-4
+          key: ${{ runner.os }}-dependencies-20201006-5
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -48,10 +48,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Update
+        run: brew update
+
       - name: Install dependencies
-        run: |
-          brew update
-          brew install doxygen
+        run: brew install doxygen
 
       - name: Configure
         run: cmake -S . -B build -DKLIB_BUILD_DOCS=ON
