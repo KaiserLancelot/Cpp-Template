@@ -48,9 +48,10 @@ CXX_FLAGS=""
 
 if $thread || $memory; then
     # libc++
-    wget https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip
-    unzip -q llvmorg-10.0.1.zip
-    cd llvm-project-llvmorg-10.0.1
+    wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip
+    unzip -q llvmorg-*.zip
+    rm llvmorg-*.zip
+    cd llvm-project-llvmorg-*
 
     if $thread; then
         C_FLAGS="-fsanitize=thread"
@@ -74,7 +75,7 @@ fi
 
 # google benchmark
 if [ ! -f "benchmark-1.5.2.zip" ]; then
-    wget https://github.com/google/benchmark/archive/v1.5.2.zip -O benchmark-1.5.2.zip
+    wget -q https://github.com/google/benchmark/archive/v1.5.2.zip -O benchmark-1.5.2.zip
 else
     echo "Build google benchmark"
 fi
@@ -92,7 +93,7 @@ cd ..
 
 # google test
 if [ ! -f "googletest-release-1.10.0.zip" ]; then
-    wget https://github.com/google/googletest/archive/release-1.10.0.zip \
+    wget -q https://github.com/google/googletest/archive/release-1.10.0.zip \
         -O googletest-release-1.10.0.zip
 else
     echo "Build google test"
@@ -112,7 +113,7 @@ cd ..
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # lcov
     if [ ! -f "lcov-1.15.zip" ]; then
-        wget https://github.com/linux-test-project/lcov/archive/v1.15.zip -O lcov-1.15.zip
+        wget -q https://github.com/linux-test-project/lcov/archive/v1.15.zip -O lcov-1.15.zip
     else
         echo "Build lcov"
     fi
@@ -125,7 +126,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     # doxygen
     if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
-        wget https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
+        wget -q https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
             -O doxygen-Release_1_8_20.zip
     else
         echo "Build doxygen"
