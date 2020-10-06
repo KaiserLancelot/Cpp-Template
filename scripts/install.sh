@@ -32,10 +32,11 @@ sudo make install
 
 cd ..
 
-cd doxygen-Release_*
-sudo cmake --build build --config Release --target install
-
-cd ..
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    cd doxygen-Release_*
+    sudo cmake --build build --config Release --target install
+    cd ..
+fi
 
 cd ..
 

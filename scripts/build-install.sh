@@ -122,19 +122,21 @@ sudo make install
 
 cd ..
 
-# doxygen
-if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
-    wget https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
-        -O doxygen-Release_1_8_20.zip
-else
-    echo "Build doxygen"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # doxygen
+    if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
+        wget https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
+            -O doxygen-Release_1_8_20.zip
+    else
+        echo "Build doxygen"
+    fi
+    unzip -q doxygen-Release_*.zip
+    rm doxygen-Release_*.zip
+    cd doxygen-Release_*
+    cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+    cmake --build build --config Release -j$PARALLEL
+    sudo cmake --build build --config Release --target install
 fi
-unzip -q doxygen-Release_*.zip
-rm doxygen-Release_*.zip
-cd doxygen-Release_*
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release -j$PARALLEL
-sudo cmake --build build --config Release --target install
 
 cd ..
 
