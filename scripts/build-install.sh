@@ -48,9 +48,10 @@ CXX_FLAGS=""
 
 if $thread || $memory; then
     # libc++
-    wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip
-    unzip -q llvmorg-*.zip
-    rm llvmorg-*.zip
+    wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip \
+        -O llvm-project-llvmorg-10.0.1.zip
+    unzip -q llvm-project-llvmorg-*.zip
+    rm llvm-project-llvmorg-*.zip
     cd llvm-project-llvmorg-*
 
     if $thread; then
