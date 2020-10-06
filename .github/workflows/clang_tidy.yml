@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-5
+          key: ${{ runner.os }}-dependencies-20201006-6
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -44,14 +44,14 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Update
-        run: brew update
+        run: brew install ninja
 
       - name: Cache dependencies
         id: cache-dependencies
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201006-5
+          key: ${{ runner.os }}-dependencies-20201006-6
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'

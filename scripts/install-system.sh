@@ -5,7 +5,7 @@ set -e
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     sudo apt update
-    sudo apt install gcc-10 g++-10 llvm valgrind flex bison libtinfo5
+    sudo apt install gcc-10 g++-10 llvm valgrind flex bison libtinfo5 ninja-build
 
     # FIXME clang-tidy failed to install using apt
     wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/clang+llvm-10.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
