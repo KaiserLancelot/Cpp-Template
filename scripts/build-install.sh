@@ -71,6 +71,11 @@ if $thread || $memory; then
     sudo cmake --build build --config Release --target install-cxx install-cxxabi
 
     cd ..
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        export C_INCLUDE_PATH=/usr/local/include
+        export CPLUS_INCLUDE_PATH=/usr/local/include
+    fi
 fi
 
 # google benchmark
@@ -79,8 +84,8 @@ if [ ! -f "benchmark-1.5.2.zip" ]; then
 else
     echo "Build google benchmark"
 fi
-unzip -q benchmark*.zip
-rm benchmark*.zip
+unzip -q benchmark-*.zip
+rm benchmark-*.zip
 cd benchmark-*
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
     -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_ENABLE_LTO=ON \

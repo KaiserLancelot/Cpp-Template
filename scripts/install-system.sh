@@ -24,9 +24,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     ln -s "$(brew --prefix llvm)/bin/llvm-ranlib" "/usr/local/bin/llvm-ranlib"
     ln -s "$(brew --prefix llvm)/bin/llvm-symbolizer" "/usr/local/bin/llvm-symbolizer"
 
-    export C_INCLUDE_PATH=/usr/local/include
-    export CPLUS_INCLUDE_PATH=/usr/local/include
-
     PARALLEL=$(sysctl -n hw.ncpu)
 
     echo "System: $OSTYPE"
