@@ -52,6 +52,7 @@ https://kaiserlancelot.github.io/cpp-template/dev/bench/
 - https://github.com/actions/checkout
 - https://github.com/actions/upload-release-asset
 - https://github.com/actions/upload-artifact
+- https://github.com/actions/cache
 - https://github.com/github/codeql-action
 - https://github.com/coverallsapp/github-action
 - https://github.com/rhysd/github-action-benchmark
