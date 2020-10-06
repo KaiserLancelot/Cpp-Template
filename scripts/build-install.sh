@@ -27,9 +27,6 @@ fi
 if $thread || $memory; then
     export CC=clang-10
     export CXX=clang++-10
-else
-    export CC=gcc-10
-    export CXX=g++-10
 fi
 
 source $(dirname "$0")/install-system.sh
@@ -66,7 +63,7 @@ if $thread || $memory; then
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=MemoryWithOrigins
     fi
 
-    cmake --build build --config Release -j$PARALLEL --target cxx cxxabi
+    cmake --build build --config Release -j$(nproc) --target cxx cxxabi
     sudo cmake --build build --config Release --target install-cxx install-cxxabi
 
     cd ..
@@ -85,7 +82,7 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
     -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_ENABLE_LTO=ON \
     -DBENCHMARK_USE_LIBCXX=OFF -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
     -DBENCHMARK_ENABLE_ASSEMBLY_TESTS=OFF -DBUILD_SHARED_LIBS=ON
-cmake --build build --config Release -j$PARALLEL
+cmake --build build --config Release -j$(nproc)
 sudo cmake --build build --config Release --target install
 
 cd ..
@@ -104,7 +101,7 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_GMOCK=OFF -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_C_FLAGS="$C_FLAGS" \
     -DCMAKE_CXX_FLAGS="$CXX_FLAGS"
-cmake --build build --config Release -j$PARALLEL
+cmake --build build --config Release -j$(nproc)
 sudo cmake --build build --config Release --target install
 
 cd ..
@@ -133,7 +130,7 @@ unzip -q doxygen-Release_*.zip
 rm doxygen-Release_*.zip
 cd doxygen-Release_*
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release -j$PARALLEL
+cmake --build build --config Release -j$(nproc)
 sudo cmake --build build --config Release --target install
 
 cd ..

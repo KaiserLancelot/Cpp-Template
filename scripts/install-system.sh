@@ -12,7 +12,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     tar -xf clang+llvm-10.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
     sudo ln clang+llvm-10.0.1-x86_64-linux-gnu-ubuntu-16.04/bin/clang-tidy /usr/bin/clang-tidy
 
-    PARALLEL=$(nproc)
+    export CC=gcc-10
+    export CXX=g++-10
 else
     echo "The system does not support: $OSTYPE"
     exit 1
