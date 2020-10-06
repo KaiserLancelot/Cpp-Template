@@ -6,8 +6,8 @@ on:
   schedule:
     - cron: "0 0 1 * *"
 
-build:
-  linux:
+jobs:
+  build:
     runs-on: ubuntu-20.04
 
     steps:

@@ -55,14 +55,14 @@ if $thread || $memory; then
     if $thread; then
         C_FLAGS="-fsanitize=thread"
         CXX_FLAGS="-fsanitize=thread -stdlib=libc++"
-        cmake -G Ninja -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
+        cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Thread
 
     fi
     if $memory; then
         C_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fno-omit-frame-pointer -fno-optimize-sibling-calls"
         CXX_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++"
-        cmake -G Ninja -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
+        cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=MemoryWithOrigins
     fi
 
@@ -81,7 +81,7 @@ fi
 unzip -q benchmark-*.zip
 rm benchmark-*.zip
 cd benchmark-*
-cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release \
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
     -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_ENABLE_LTO=ON \
     -DBENCHMARK_USE_LIBCXX=OFF -DBENCHMARK_ENABLE_GTEST_TESTS=OFF \
     -DBENCHMARK_ENABLE_ASSEMBLY_TESTS=OFF -DBUILD_SHARED_LIBS=ON
@@ -100,7 +100,7 @@ fi
 unzip -q googletest-release-*.zip
 rm googletest-release-*.zip
 cd googletest-release-*
-cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release \
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_GMOCK=OFF -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_C_FLAGS="$C_FLAGS" \
     -DCMAKE_CXX_FLAGS="$CXX_FLAGS"
@@ -132,7 +132,7 @@ fi
 unzip -q doxygen-Release_*.zip
 rm doxygen-Release_*.zip
 cd doxygen-Release_*
-cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release -j$PARALLEL
 sudo cmake --build build --config Release --target install
 

@@ -111,7 +111,7 @@ if(KLIB_INSTALL)
       CACHE BOOL "Build relocatable package")
 
   set(CPACK_GENERATOR
-      "DEB"
+      "TGZ;DEB"
       CACHE STRING "Semicolon separated list of generators")
 
   set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
