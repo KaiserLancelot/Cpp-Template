@@ -39,10 +39,14 @@ jobs:
 
       - name: Run benchmark(json)
         if: ${{ github.event_name == 'push' }}
-        run: ./build/benchmark --benchmark_out=benchmark-result.json --benchmark_out_format=json
+        run: |
+          ./build/benchmarks/benchmark --benchmark_out=benchmark-result.json \
+          --benchmark_out_format=json
 
       - name: Run benchmark(txt)
-        run: ./build/benchmark --benchmark_out=benchmark-result.txt --benchmark_out_format=console
+        run: |
+          ./build/benchmarks/benchmark --benchmark_out=benchmark-result.txt \
+          --benchmark_out_format=console
 
       - name: Store benchmark result
         if: ${{ github.event_name == 'push' }}

@@ -73,12 +73,12 @@ if(KLIB_BUILD_COVERAGE OR KLIB_BUILD_ALL)
       COMMAND ${LLVM_PROFDATA_EXECUTABLE} merge -sparse -o
               ${TESTS_EXECUTABLE}.profdata default.profraw
       COMMAND
-        ${LLVM_COV_EXECUTABLE} show ${TESTS_EXECUTABLE}
+        ${LLVM_COV_EXECUTABLE} show tests/${TESTS_EXECUTABLE}
         -instr-profile=${TESTS_EXECUTABLE}.profdata -format=html
         -output-dir=coverage -show-line-counts-or-regions
         -ignore-filename-regex=${CMAKE_CURRENT_SOURCE_DIR}/tests/*
       COMMAND
-        ${LLVM_COV_EXECUTABLE} export ${TESTS_EXECUTABLE}
+        ${LLVM_COV_EXECUTABLE} export tests/${TESTS_EXECUTABLE}
         -instr-profile=${TESTS_EXECUTABLE}.profdata
         -ignore-filename-regex=${CMAKE_CURRENT_SOURCE_DIR}/tests/* -format=lcov
         > lcov.info

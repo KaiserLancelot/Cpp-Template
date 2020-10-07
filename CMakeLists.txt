@@ -101,6 +101,8 @@ if(KLIB_BUILD_EXECUTABLE OR KLIB_BUILD_ALL)
   target_link_libraries(${EXECUTABLE} PRIVATE ${LIBRARY})
 endif()
 
+include(Install)
+
 # ---------------------------------------------------------------------------------------
 # Build tests
 # ---------------------------------------------------------------------------------------
@@ -112,30 +114,12 @@ if(BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL))
   include(Coverage)
   include(Valgrind)
 
-  file(GLOB_RECURSE TESTS_SRC CONFIGURE_DEPENDS
-       ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
-
-  find_package(GTest REQUIRED)
-
-  add_executable(${TESTS_EXECUTABLE} ${TESTS_SRC})
-  target_link_libraries(${TESTS_EXECUTABLE} PRIVATE ${LIBRARY} GTest::gtest)
-  gtest_discover_tests(${TESTS_EXECUTABLE})
+  add_subdirectory(tests)
 endif()
 
 # ---------------------------------------------------------------------------------------
 # Build benchmarks
 # ---------------------------------------------------------------------------------------
 if(KLIB_BUILD_BENCHMARKS OR KLIB_BUILD_ALL)
-  message(STATUS "Build benchmarks")
-
-  file(GLOB_RECURSE BENCHMARK_SRC CONFIGURE_DEPENDS
-       ${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/*.cpp)
-
-  find_package(benchmark REQUIRED)
-
-  add_executable(${BENCHMARKS_EXECUTABLE} ${BENCHMARK_SRC})
-  target_link_libraries(${BENCHMARKS_EXECUTABLE} PRIVATE ${LIBRARY}
-                                                         benchmark::benchmark)
+  add_subdirectory(benchmarks)
 endif()
-
-include(Install)

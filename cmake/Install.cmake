@@ -83,7 +83,8 @@ if(KLIB_INSTALL)
                       INTERFACE_COMPILE_DEFINITIONS)
   string(REPLACE ";" " -D" KLIB_PKG_CONFIG_DEFINES "${KLIB_PKG_CONFIG_DEFINES}")
   string(CONCAT KLIB_PKG_CONFIG_DEFINES "-D" "${KLIB_PKG_CONFIG_DEFINES}")
-  configure_file("cmake/${LIBRARY}.pc.in" "${KLIB_PKG_CONFIG}" @ONLY)
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/${LIBRARY}.pc.in"
+                 "${KLIB_PKG_CONFIG}" @ONLY)
   install(FILES "${KLIB_PKG_CONFIG}"
           DESTINATION "${KLIB_PKG_CONFIG_INSTALL_DIR}")
 
