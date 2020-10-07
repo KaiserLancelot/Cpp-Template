@@ -37,10 +37,6 @@ list(REMOVE_ITEM LIBRARY_SRC ${EXECUTABLE_SRC})
 
 set(LIBRARY_TARGETS)
 
-if((NOT KLIB_BUILD_STATIC) AND (NOT KLIB_BUILD_SHARED))
-  message(FATAL_ERROR "You need to build at least one flavor of klib")
-endif()
-
 # ---------------------------------------------------------------------------------------
 # Build static library
 # ---------------------------------------------------------------------------------------
@@ -100,6 +96,9 @@ if(KLIB_BUILD_EXECUTABLE OR KLIB_BUILD_ALL)
   target_link_libraries(${EXECUTABLE} PRIVATE ${LIBRARY})
 endif()
 
+# ---------------------------------------------------------------------------------------
+# Build install
+# ---------------------------------------------------------------------------------------
 include(Install)
 
 # ---------------------------------------------------------------------------------------

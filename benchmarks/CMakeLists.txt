@@ -1,5 +1,7 @@
 message(STATUS "Build benchmarks")
 
+add_compiler_flag("-Wno-global-constructors")
+
 file(GLOB_RECURSE BENCHMARK_SRC CONFIGURE_DEPENDS
      ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 

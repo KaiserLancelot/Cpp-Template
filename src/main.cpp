@@ -6,6 +6,7 @@
 
 #include "klib/add.h"
 #include "klib/bar.h"
+#include "klib/vec.h"
 #include "klib/version.h"
 
 int main() {
@@ -13,6 +14,9 @@ int main() {
   v.push_back(1);
   v.push_back(2);
   v.push_back(3);
+
+  klib::Vec<std::int32_t> vec;
+  vec.push_back(42);
 
   std::string str{"Hello World!"};
 

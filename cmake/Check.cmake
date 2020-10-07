@@ -51,3 +51,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
+
+if((NOT KLIB_BUILD_STATIC) AND (NOT KLIB_BUILD_SHARED))
+  message(FATAL_ERROR "You need to build at least one flavor of klib")
+endif()

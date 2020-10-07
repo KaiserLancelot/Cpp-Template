@@ -20,9 +20,9 @@ BENCHMARK(vec_base_benchmark);
 
 void vec_benchmark(benchmark::State& state) {
   for (auto _ : state) {
-    Vec<std::string> v;
+    klib::Vec<std::string> v;
     for (std::int32_t i{0}; i < 100000; ++i) {
-      v.PushBack("string");
+      v.push_back("string");
     }
     benchmark::DoNotOptimize(v);
   }

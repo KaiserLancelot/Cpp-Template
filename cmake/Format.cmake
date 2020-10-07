@@ -26,8 +26,10 @@ if(KLIB_FORMAT)
     GLOB_RECURSE
     CMAKE_FORMAT_SRC
     CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/CMakeLists.txt
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/*.cmake
     ${CMAKE_CURRENT_SOURCE_DIR}/examples/CMakeLists.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt
     ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt)
 
   add_custom_target(

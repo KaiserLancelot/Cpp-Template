@@ -82,11 +82,10 @@ if(KLIB_INSTALL)
 
   get_target_property(KLIB_PKG_CONFIG_DEFINES ${LIBRARY}
                       INTERFACE_COMPILE_DEFINITIONS)
-  string(REPLACE ";" " -D" KLIB_PKG_CONFIG_DEFINES "${KLIB_PKG_CONFIG_DEFINES}")
-  string(CONCAT KLIB_PKG_CONFIG_DEFINES "-D" "${KLIB_PKG_CONFIG_DEFINES}")
+  string(REPLACE ";" " -D" KLIB_PKG_CONFIG_DEFINES ${KLIB_PKG_CONFIG_DEFINES})
+  string(CONCAT KLIB_PKG_CONFIG_DEFINES "-D" ${KLIB_PKG_CONFIG_DEFINES})
   configure_file(${KLIB_PKG_CONFIG_IN} ${KLIB_PKG_CONFIG} @ONLY)
-  install(FILES "${KLIB_PKG_CONFIG}"
-          DESTINATION "${KLIB_PKG_CONFIG_INSTALL_DIR}")
+  install(FILES ${KLIB_PKG_CONFIG} DESTINATION ${KLIB_PKG_CONFIG_INSTALL_DIR})
 
   # ---------------------------------------------------------------------------------------
   # Support creation of installable packages
