@@ -29,7 +29,7 @@ if(KLIB_INSTALL)
   # ---------------------------------------------------------------------------------------
   # Include files
   # ---------------------------------------------------------------------------------------
-  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  install(DIRECTORY "include/" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
   install(
     TARGETS ${LIBRARY_TARGETS}
     EXPORT KLIBEXPORTS

@@ -3,11 +3,11 @@ if(KLIB_BUILD_DOCS OR KLIB_BUILD_ALL)
 
   find_package(Doxygen REQUIRED)
 
-  set(INPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/klib)
+  set(INPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/klib")
   set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
-                 ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in"
+                 "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
 
   add_custom_target(
     doc

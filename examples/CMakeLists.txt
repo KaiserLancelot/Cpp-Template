@@ -69,7 +69,7 @@ else()
   find_package(klib REQUIRED)
 endif()
 
-file(GLOB SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 foreach(FILE_PATH ${SRC})
   get_filename_component(FILE_NAME ${FILE_PATH} NAME_WE)
   add_executable(${FILE_NAME} ${FILE_PATH})

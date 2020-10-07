@@ -4,7 +4,7 @@ include(AddCompilerFlag)
 add_compiler_flag("-Wno-global-constructors")
 
 file(GLOB_RECURSE BENCHMARK_SRC CONFIGURE_DEPENDS
-     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 find_package(benchmark REQUIRED)
 

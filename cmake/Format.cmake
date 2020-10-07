@@ -16,21 +16,21 @@ if(KLIB_FORMAT)
     GLOB_RECURSE
     CLANG_FORMAT_SRC
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
+    "${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp")
 
   file(
     GLOB_RECURSE
     CMAKE_FORMAT_SRC
     CONFIGURE_DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/CMakeLists.txt
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/*.cmake
-    ${CMAKE_CURRENT_SOURCE_DIR}/examples/CMakeLists.txt
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt
-    ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt)
+    "${CMAKE_CURRENT_SOURCE_DIR}/benchmarks/CMakeLists.txt"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/*.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/examples/CMakeLists.txt"
+    "${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt"
+    "${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt")
 
   add_custom_target(
     format

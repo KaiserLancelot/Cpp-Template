@@ -40,7 +40,7 @@ else()
                       ${CMAKE_SYSTEM_NAME} " " ${CMAKE_CXX_COMPILER_ID})
 endif()
 
-if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_CURRENT_BINARY_DIR)
   message(FATAL_ERROR "In-source builds not allowed")
 endif()
 
@@ -52,6 +52,6 @@ endif()
 
 message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 
-if((NOT KLIB_BUILD_STATIC) AND (NOT KLIB_BUILD_SHARED))
+if(NOT (KLIB_BUILD_STATIC OR KLIB_BUILD_SHARED))
   message(FATAL_ERROR "You need to build at least one flavor of klib")
 endif()
