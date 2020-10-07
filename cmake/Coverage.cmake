@@ -38,8 +38,8 @@ if(KLIB_BUILD_COVERAGE OR KLIB_BUILD_ALL)
       COMMAND
         ${LCOV_EXECUTABLE} -d . --include
         '${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp' --include
-        '${CMAKE_CURRENT_SOURCE_DIR}/include/*.h' --gcov-tool ${GCOV_EXECUTABLE}
-        -c -o lcov.info --rc lcov_branch_coverage=1
+        '${CMAKE_CURRENT_SOURCE_DIR}/include/klib/*.h' --gcov-tool
+        ${GCOV_EXECUTABLE} -c -o lcov.info --rc lcov_branch_coverage=1
       COMMAND ${GENHTML_EXECUTABLE} lcov.info -o coverage -s --title
               "${PROJECT_NAME}" --legend --demangle-cpp --branch-coverage
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
