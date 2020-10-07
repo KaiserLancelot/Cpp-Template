@@ -45,16 +45,16 @@ jobs:
         run: cmake --build build --config Debug -j$(nproc) --target coverage
 
       - name: Coveralls
-        if: ${{ matrix.config.cxx == 'g++-10' }}
+        if: ${{ matrix.config.cxx == 'clang++-10' }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: build/lcov.info
 
       - name: Upload artifact
-        if: ${{ matrix.config.cxx == 'clang++-10' }}
+        if: ${{ matrix.config.cxx == 'g++-10' }}
         uses: actions/upload-artifact@v2
         with:
-          name: coverage-clang
+          name: coverage-lcov
           path: build/coverage
           if-no-files-found: error

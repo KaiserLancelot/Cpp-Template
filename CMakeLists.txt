@@ -21,7 +21,6 @@ include(ClangTidy)
 include(CompilerOptions)
 include(Doxygen)
 include(Format)
-include(Sanitizer)
 
 # ---------------------------------------------------------------------------------------
 # Set variables
@@ -107,14 +106,10 @@ include(Install)
 # Build tests
 # ---------------------------------------------------------------------------------------
 if(BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL))
-  message(STATUS "Build tests")
-
   enable_testing()
+  add_subdirectory(tests)
 
   include(Coverage)
-  include(Valgrind)
-
-  add_subdirectory(tests)
 endif()
 
 # ---------------------------------------------------------------------------------------
