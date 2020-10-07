@@ -1,5 +1,6 @@
 message(STATUS "Build tests")
 
+include(AddCompilerFlag)
 add_compiler_flag("-Wno-global-constructors")
 
 file(GLOB_RECURSE TESTS_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)

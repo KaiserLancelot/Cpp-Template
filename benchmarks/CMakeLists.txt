@@ -1,5 +1,6 @@
 message(STATUS "Build benchmarks")
 
+include(AddCompilerFlag)
 add_compiler_flag("-Wno-global-constructors")
 
 file(GLOB_RECURSE BENCHMARK_SRC CONFIGURE_DEPENDS
