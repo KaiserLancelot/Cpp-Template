@@ -6,6 +6,8 @@
 
 #include "klib/vec.h"
 
+namespace {
+
 void vec_base_benchmark(benchmark::State& state) {
   for (auto _ : state) {
     std::vector<std::string> v;
@@ -15,8 +17,6 @@ void vec_base_benchmark(benchmark::State& state) {
     benchmark::DoNotOptimize(v);
   }
 }
-
-BENCHMARK(vec_base_benchmark);
 
 void vec_benchmark(benchmark::State& state) {
   for (auto _ : state) {
@@ -28,4 +28,7 @@ void vec_benchmark(benchmark::State& state) {
   }
 }
 
+}  // namespace
+
+BENCHMARK(vec_base_benchmark);
 BENCHMARK(vec_benchmark);
