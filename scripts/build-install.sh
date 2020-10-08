@@ -25,13 +25,13 @@ if $thread && $memory; then
     exit 1
 fi
 
+source $(dirname "$0")/install-system.sh
+
 if $thread || $memory; then
     export CC=clang-10
     export CXX=clang++-10
     BUILD_TYPE=RelWithDebInfo
 fi
-
-source $(dirname "$0")/install-system.sh
 
 if [ ! -d "dependencies" ]; then
     echo "mkdir dependencies"
