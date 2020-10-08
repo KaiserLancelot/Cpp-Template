@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1602156547479,
+  "lastUpdate": 1602157594306,
   "repoUrl": "https://github.com/KaiserLancelot/cpp-template",
   "entries": {
     "C++ Benchmark(macOS)": [
@@ -10282,6 +10282,54 @@ window.BENCHMARK_DATA = {
             "value": 2.0343838823137634,
             "unit": "ns/iter",
             "extra": "iterations: 345398460\ncpu: 2.0337666502624248 ns\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "1244713586@qq.com",
+            "name": "kaiser",
+            "username": "KaiserLancelot"
+          },
+          "committer": {
+            "email": "1244713586@qq.com",
+            "name": "kaiser",
+            "username": "KaiserLancelot"
+          },
+          "distinct": true,
+          "id": "7885c50e32a06608cd0b0d9f30379a40ed22cd42",
+          "message": "2020.10.8",
+          "timestamp": "2020-10-08T19:44:41+08:00",
+          "tree_id": "785edceb903f1b6249d887474387da1038e6bcd6",
+          "url": "https://github.com/KaiserLancelot/cpp-template/commit/7885c50e32a06608cd0b0d9f30379a40ed22cd42"
+        },
+        "date": 1602157593220,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "vec_base_benchmark",
+            "value": 4035500.9937499627,
+            "unit": "ns/iter",
+            "extra": "iterations: 160\ncpu: 4034939.35625 ns\nthreads: 1"
+          },
+          {
+            "name": "vec_benchmark",
+            "value": 4266383.600000181,
+            "unit": "ns/iter",
+            "extra": "iterations: 165\ncpu: 4266330.2787878765 ns\nthreads: 1"
+          },
+          {
+            "name": "bar_benchmark",
+            "value": 3.191407631414318,
+            "unit": "ns/iter",
+            "extra": "iterations: 208637465\ncpu: 3.1912989836221417 ns\nthreads: 1"
+          },
+          {
+            "name": "add_benchmark",
+            "value": 2.1697610324784593,
+            "unit": "ns/iter",
+            "extra": "iterations: 355867481\ncpu: 2.1695584149201874 ns\nthreads: 1"
           }
         ]
       }
