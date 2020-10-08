@@ -23,10 +23,14 @@ class Vec {
   Vec& operator=(const Vec& item);
   ~Vec() { free(); }
   void push_back(const T& s);
-  SizeType size() const { return static_cast<SizeType>(end_ - begin_); }
-  SizeType capacity() const { return static_cast<SizeType>(cap_ - begin_); }
-  T* begin() const { return begin_; }
-  T* end() const { return end_; }
+  [[nodiscard]] SizeType size() const {
+    return static_cast<SizeType>(end_ - begin_);
+  }
+  [[nodiscard]] SizeType capacity() const {
+    return static_cast<SizeType>(cap_ - begin_);
+  }
+  [[nodiscard]] T* begin() const { return begin_; }
+  [[nodiscard]] T* end() const { return end_; }
   void reserve(SizeType new_cap);
   void resize(SizeType new_size);
   void resize(SizeType new_size, const T& value);

@@ -8,7 +8,7 @@ BUILD_TYPE=Release
 
 while getopts 'g' OPT; do
     case $OPT in
-    m)
+    g)
         export CC=clang-10
         export CXX=clang++-10
         BUILD_TYPE=RelWithDebInfo
