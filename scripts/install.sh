@@ -2,6 +2,19 @@
 
 set -e
 
+BUILD_TYPE=Release
+
+while getopts 'g' OPT; do
+    case $OPT in
+    m)
+        BUILD_TYPE=RelWithDebInfo
+        ;;
+    ?)
+        exit 1
+        ;;
+    esac
+done
+
 if [ ! -d "dependencies" ]; then
     echo "The dependencies directory does not exist"
     exit 1
@@ -13,7 +26,7 @@ cd dependencies
 
 if [ -d llvm-project-llvmorg-* ]; then
     cd llvm-project-llvmorg-*
-    sudo cmake --build build --config Release --target install-cxx install-cxxabi
+    sudo cmake --build build --config RelWithDebInfo --target install-cxx install-cxxabi
     cd ..
     echo "Install libc++ completed"
 fi
@@ -24,7 +37,7 @@ cd ..
 echo "Install google benchmark completed"
 
 cd googletest-release-*
-sudo cmake --build build --config Release --target install
+sudo cmake --build build --config $BUILD_TYPE --target install
 cd ..
 echo "Install google test completed"
 

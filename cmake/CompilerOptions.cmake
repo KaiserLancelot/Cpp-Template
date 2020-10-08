@@ -81,6 +81,7 @@ if(KLIB_SANITIZER)
 
     add_compiler_flag("-fsanitize=memory")
     add_compiler_flag("-fsanitize-memory-track-origins")
+    add_compiler_flag("-fsanitize-memory-use-after-dtor")
     add_compiler_flag("-fno-optimize-sibling-calls")
   elseif(KLIB_SANITIZER STREQUAL "Undefined")
     message(STATUS "Build with UndefinedSanitizer")

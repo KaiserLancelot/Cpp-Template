@@ -76,14 +76,14 @@ https://kaiserlancelot.github.io/cpp-template/dev/bench/
 
 - https://github.com/google/sanitizers/wiki/AddressSanitizer
 - https://github.com/google/sanitizers/wiki/AddressSanitizerLeakSanitizer
-- https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual
 - https://github.com/google/sanitizers/wiki/MemorySanitizer
 - https://github.com/google/sanitizers/wiki/MemorySanitizerLibcxxHowTo
+- https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual
 - https://clang.llvm.org/docs/AddressSanitizer.html
 - https://clang.llvm.org/docs/LeakSanitizer.html
-- https://clang.llvm.org/docs/ThreadSanitizer.html
 - https://clang.llvm.org/docs/MemorySanitizer.html
 - https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
+- https://clang.llvm.org/docs/ThreadSanitizer.html
 
 ### Tools
 

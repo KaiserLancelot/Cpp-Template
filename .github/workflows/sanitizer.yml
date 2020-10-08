@@ -50,41 +50,6 @@ jobs:
           ASAN_OPTIONS: detect_stack_use_after_return=1
           UBSAN_OPTIONS: print_stacktrace=1
 
-  thread:
-    runs-on: ubuntu-20.04
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: dependencies
-          key: ${{ runner.os }}-dependencies-thread-20201010
-
-      - name: Build and install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: sudo bash ./scripts/build-install.sh -t
-
-      - name: Install dependencies
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
-
-      - name: Configure
-        run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
-        env:
-          CC: clang-10
-          CXX: clang++-10
-
-      - name: Build
-        run: cmake --build build --config RelWithDebInfo -j$(nproc)
-
-      - name: Test
-        run: cd build ; ctest -C RelWithDebInfo -j$(nproc) --output-on-failure
-
   memory:
     runs-on: ubuntu-20.04
 
@@ -104,12 +69,49 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-dependencies.outputs.cache-hit == 'true'
-        run: sudo bash ./scripts/install.sh
+        run: sudo bash ./scripts/install.sh -g
 
       - name: Configure
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Memory -DKLIB_USE_LIBCXX=ON
+        env:
+          CC: clang-10
+          CXX: clang++-10
+
+      - name: Build
+        run: cmake --build build --config RelWithDebInfo -j$(nproc)
+
+      - name: Test
+        run: cd build ; ctest -C RelWithDebInfo -j$(nproc) --output-on-failure
+        env:
+          MSAN_OPTIONS: poison_in_dtor=1
+
+  thread:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: dependencies
+          key: ${{ runner.os }}-dependencies-thread-20201010
+
+      - name: Build and install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: sudo bash ./scripts/build-install.sh -t
+
+      - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit == 'true'
+        run: sudo bash ./scripts/install.sh -g
+
+      - name: Configure
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
         env:
           CC: clang-10
           CXX: clang++-10

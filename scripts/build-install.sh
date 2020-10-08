@@ -4,6 +4,7 @@ set -e
 
 thread=false
 memory=false
+BUILD_TYPE=Release
 
 while getopts 'mt' OPT; do
     case $OPT in
@@ -27,6 +28,7 @@ fi
 if $thread || $memory; then
     export CC=clang-10
     export CXX=clang++-10
+    BUILD_TYPE=RelWithDebInfo
 fi
 
 source $(dirname "$0")/install-system.sh
@@ -52,19 +54,19 @@ if $thread || $memory; then
     if $thread; then
         C_FLAGS="-fsanitize=thread"
         CXX_FLAGS="-fsanitize=thread -stdlib=libc++"
-        cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
+        cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Thread
 
     fi
     if $memory; then
-        C_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fno-omit-frame-pointer -fno-optimize-sibling-calls"
-        CXX_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++"
-        cmake -S llvm -B build -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_LIBCXX=ON \
+        C_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fsanitize-memory-use-after-dtor -fno-omit-frame-pointer -fno-optimize-sibling-calls"
+        CXX_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fsanitize-memory-use-after-dtor -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++"
+        cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=MemoryWithOrigins
     fi
 
-    cmake --build build --config Release -j$(nproc) --target cxx cxxabi
-    sudo cmake --build build --config Release --target install-cxx install-cxxabi
+    cmake --build build --config RelWithDebInfo -j$(nproc) --target cxx cxxabi
+    sudo cmake --build build --config RelWithDebInfo --target install-cxx install-cxxabi
 
     cd ..
 fi
@@ -97,12 +99,12 @@ fi
 unzip -q googletest-release-*.zip
 rm googletest-release-*.zip
 cd googletest-release-*
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+cmake -S . -B build -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
     -DBUILD_GMOCK=OFF -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_C_FLAGS="$C_FLAGS" \
     -DCMAKE_CXX_FLAGS="$CXX_FLAGS"
-cmake --build build --config Release -j$(nproc)
-sudo cmake --build build --config Release --target install
+cmake --build build --config $BUILD_TYPE -j$(nproc)
+sudo cmake --build build --config $BUILD_TYPE --target install
 
 cd ..
 
