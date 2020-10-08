@@ -2,6 +2,8 @@
 
 set -e
 
+source $(dirname "$0")/install-system.sh
+
 thread=false
 memory=false
 BUILD_TYPE=Release
@@ -25,8 +27,6 @@ if $thread && $memory; then
     exit 1
 fi
 
-source $(dirname "$0")/install-system.sh
-
 if $thread || $memory; then
     export CC=clang-10
     export CXX=clang++-10
@@ -45,8 +45,8 @@ CXX_FLAGS=""
 
 if $thread || $memory; then
     # libc++
-    wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.zip \
-        -O llvm-project-llvmorg-10.0.1.zip
+    wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.0.zip \
+        -O llvm-project-llvmorg-10.0.0.zip
     unzip -q llvm-project-llvmorg-*.zip
     rm llvm-project-llvmorg-*.zip
     cd llvm-project-llvmorg-*
