@@ -13,6 +13,8 @@
 
 namespace klib {
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpadded"
 template <typename T>
 class Vec {
  public:
@@ -47,6 +49,7 @@ class Vec {
 
   std::allocator<T> alloc_;
 };
+#pragma GCC diagnostic pop
 
 template <typename T>
 Vec<T>::Vec(std::initializer_list<T> il) {

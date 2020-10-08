@@ -107,6 +107,4 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   add_compiler_flag("-Weverything")
 
   add_compiler_flag("-Wno-c++98-compat")
-
-  add_compiler_flag("-Wno-error=padded")
 endif()
