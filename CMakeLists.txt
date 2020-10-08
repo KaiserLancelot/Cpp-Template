@@ -97,23 +97,26 @@ if(KLIB_BUILD_EXECUTABLE OR KLIB_BUILD_ALL)
 endif()
 
 # ---------------------------------------------------------------------------------------
-# Build install
-# ---------------------------------------------------------------------------------------
-include(Install)
-
-# ---------------------------------------------------------------------------------------
 # Build tests
 # ---------------------------------------------------------------------------------------
 if(BUILD_TESTING AND (KLIB_BUILD_TESTS OR KLIB_BUILD_ALL))
+  message(STATUS "Build tests")
   enable_testing()
   add_subdirectory(tests)
 
   include(Coverage)
+  include(Valgrind)
 endif()
 
 # ---------------------------------------------------------------------------------------
 # Build benchmarks
 # ---------------------------------------------------------------------------------------
 if(KLIB_BUILD_BENCHMARKS OR KLIB_BUILD_ALL)
+  message(STATUS "Build benchmarks")
   add_subdirectory(benchmarks)
 endif()
+
+# ---------------------------------------------------------------------------------------
+# Install target
+# ---------------------------------------------------------------------------------------
+include(Install)

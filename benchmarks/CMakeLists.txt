@@ -1,5 +1,3 @@
-message(STATUS "Build benchmarks")
-
 include(AddCompilerFlag)
 add_compiler_flag("-Wno-global-constructors")
 
