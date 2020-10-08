@@ -2,11 +2,15 @@
 
 set -e
 
+source $(dirname "$0")/install-system.sh
+
 BUILD_TYPE=Release
 
 while getopts 'g' OPT; do
     case $OPT in
     m)
+        export CC=clang-10
+        export CXX=clang++-10
         BUILD_TYPE=RelWithDebInfo
         ;;
     ?)
@@ -19,8 +23,6 @@ if [ ! -d "dependencies" ]; then
     echo "The dependencies directory does not exist"
     exit 1
 fi
-
-source $(dirname "$0")/install-system.sh
 
 cd dependencies
 
