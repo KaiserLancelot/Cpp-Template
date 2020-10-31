@@ -13,7 +13,7 @@ jobs:
       matrix:
         config:
           - { cc: "gcc-10", cxx: "g++-10" }
-          - { cc: "clang-10", cxx: "clang++-10" }
+          - { cc: "clang-11", cxx: "clang++-11" }
 
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201013
+          key: ${{ runner.os }}-dependencies-20201031
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -52,7 +52,7 @@ jobs:
           path-to-lcov: build/lcov.info
 
       - name: Upload artifact
-        if: ${{ matrix.config.cxx == 'clang++-10' }}
+        if: ${{ matrix.config.cxx == 'clang++-11' }}
         uses: actions/upload-artifact@v2
         with:
           name: coverage-llvm-cov

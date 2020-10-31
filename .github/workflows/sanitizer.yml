@@ -13,7 +13,7 @@ jobs:
       matrix:
         config:
           - { cc: "gcc-10", cxx: "g++-10" }
-          - { cc: "clang-10", cxx: "clang++-10" }
+          - { cc: "clang-11", cxx: "clang++-11" }
 
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201013
+          key: ${{ runner.os }}-dependencies-20201031
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-memory-20201013
+          key: ${{ runner.os }}-dependencies-memory-20201031
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -76,8 +76,8 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Memory -DKLIB_USE_LIBCXX=ON
         env:
-          CC: clang-10
-          CXX: clang++-10
+          CC: clang-11
+          CXX: clang++-11
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j$(nproc)
@@ -98,7 +98,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-thread-20201013
+          key: ${{ runner.os }}-dependencies-thread-20201031
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -113,8 +113,8 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
         env:
-          CC: clang-10
-          CXX: clang++-10
+          CC: clang-11
+          CXX: clang++-11
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j$(nproc)

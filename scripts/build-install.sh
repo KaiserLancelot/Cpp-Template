@@ -28,8 +28,8 @@ if $thread && $memory; then
 fi
 
 if $thread || $memory; then
-    export CC=clang-10
-    export CXX=clang++-10
+    export CC=clang-11
+    export CXX=clang++-11
     BUILD_TYPE=RelWithDebInfo
 fi
 
@@ -86,9 +86,9 @@ CXX_FLAGS=""
 
 if $thread || $memory; then
     # libc++
-    if [ ! -f "llvm-project-llvmorg-10.0.0.zip" ]; then
-        wget -q https://github.com/llvm/llvm-project/archive/llvmorg-10.0.0.zip \
-            -O llvm-project-llvmorg-10.0.0.zip
+    if [ ! -f "llvm-project-llvmorg-11.0.0.zip" ]; then
+        wget -q https://github.com/llvm/llvm-project/archive/llvmorg-11.0.0.zip \
+            -O llvm-project-llvmorg-11.0.0.zip
     fi
     unzip -q llvm-project-llvmorg-*.zip
     rm llvm-project-llvmorg-*.zip
