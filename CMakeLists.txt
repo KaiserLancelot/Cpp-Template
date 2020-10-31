@@ -54,10 +54,8 @@ if(KLIB_BUILD_STATIC)
   target_compile_features(${LIBRARY} PUBLIC cxx_std_20)
 
   set_target_properties(
-    ${LIBRARY}
-    PROPERTIES OUTPUT_NAME ${LIBRARY}
-               POSITION_INDEPENDENT_CODE ON
-               DEBUG_POSTFIX d)
+    ${LIBRARY} PROPERTIES OUTPUT_NAME ${LIBRARY} POSITION_INDEPENDENT_CODE ON
+                          DEBUG_POSTFIX d)
 endif()
 
 # ---------------------------------------------------------------------------------------
@@ -81,10 +79,8 @@ if(KLIB_BUILD_SHARED)
 
   set_target_properties(
     ${LIBRARY}-shared
-    PROPERTIES OUTPUT_NAME ${LIBRARY}
-               VERSION ${KLIB_VERSION}
-               SOVERSION ${KLIB_VERSION_MAJOR}
-               DEBUG_POSTFIX d)
+    PROPERTIES OUTPUT_NAME ${LIBRARY} VERSION ${KLIB_VERSION}
+               SOVERSION ${KLIB_VERSION_MAJOR} DEBUG_POSTFIX d)
 endif()
 
 # ---------------------------------------------------------------------------------------
