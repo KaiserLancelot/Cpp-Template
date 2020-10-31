@@ -42,6 +42,7 @@ endif()
 # lld
 # ---------------------------------------------------------------------------------------
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  message(STATUS "Use lld")
   add_link_options("-fuse-ld=lld")
 endif()
 

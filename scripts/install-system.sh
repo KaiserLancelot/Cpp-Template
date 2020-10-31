@@ -9,7 +9,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
-    sudo apt install clang-tidy-11
+    sudo apt install clang-tidy-11 libc++-11-dev libc++abi-11-dev
 
     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
