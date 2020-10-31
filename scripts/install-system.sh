@@ -11,6 +11,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     sudo apt install clang-tidy-11
 
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
     sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-11 100
     sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-11 100
     sudo update-alternatives --install /usr/bin/llvm-profdata llvm-profdata /usr/bin/llvm-profdata-11 100
@@ -22,9 +24,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sudo update-alternatives --install /usr/bin/llvm-symbolizer llvm-symbolizer /usr/bin/llvm-symbolizer-11 100
     sudo update-alternatives --install /usr/bin/lld lld /usr/bin/lld-11 100
     sudo update-alternatives --install /usr/bin/ld.lld ld.lld /usr/bin/ld.lld-11 100
-
-    export CC=gcc-10
-    export CXX=g++-10
 else
     echo "The system does not support: $OSTYPE"
     exit 1

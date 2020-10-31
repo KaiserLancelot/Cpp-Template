@@ -30,9 +30,6 @@ jobs:
 
       - name: Configure
         run: cmake -S . -B build -DKLIB_CLANG_TIDY=ON
-        env:
-          CC: gcc-10
-          CXX: g++-10
 
       - name: Build
         run: cmake --build build --config Release -j$(nproc)

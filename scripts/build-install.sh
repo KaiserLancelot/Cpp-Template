@@ -95,17 +95,17 @@ if $thread || $memory; then
     cd llvm-project-llvmorg-*
 
     if $thread; then
-        C_FLAGS="-fsanitize=thread"
-        CXX_FLAGS="-fsanitize=thread -stdlib=libc++"
         cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Thread
-
+        C_FLAGS="-fsanitize=thread"
+        CXX_FLAGS="-fsanitize=thread -stdlib=libc++"
     fi
+
     if $memory; then
-        C_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fsanitize-memory-use-after-dtor -fno-omit-frame-pointer -fno-optimize-sibling-calls"
-        CXX_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fsanitize-memory-use-after-dtor -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++"
         cmake -S llvm -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=MemoryWithOrigins
+        C_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fsanitize-memory-use-after-dtor -fno-omit-frame-pointer -fno-optimize-sibling-calls"
+        CXX_FLAGS="-fsanitize=memory -fsanitize-memory-track-origins -fsanitize-memory-use-after-dtor -fno-omit-frame-pointer -fno-optimize-sibling-calls -stdlib=libc++"
     fi
 
     cmake --build build --config RelWithDebInfo -j$(nproc) --target cxx cxxabi
