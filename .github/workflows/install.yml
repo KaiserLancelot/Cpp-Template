@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        use_add_sub: ["ON", "OFF"]
+        use_add_subdirectory: ["ON", "OFF"]
         config:
           - { cc: "gcc-10", cxx: "g++-10" }
           - { cc: "clang-11", cxx: "clang++-11" }
@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dependencies
-          key: ${{ runner.os }}-dependencies-20201031
+          key: ${{ runner.os }}-dependencies-20210226
 
       - name: Build and install dependencies
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -53,7 +53,7 @@ jobs:
           cp -r examples ../
           cd ../examples
           cp -r ../cpp-template .
-          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.use_add_sub }}
+          cmake -S . -B build -DEXAMPLES_USE_ADD_SUBDIRECTORY=${{ matrix.use_add_subdirectory }}
           cmake --build build --config Release -j$(nproc)
         env:
           CC: ${{ matrix.config.cc }}

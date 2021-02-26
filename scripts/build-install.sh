@@ -52,9 +52,9 @@ cd ..
 echo "Build and install lcov completed"
 
 # doxygen
-if [ ! -f "doxygen-Release_1_8_20.zip" ]; then
-    wget -q https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip \
-        -O doxygen-Release_1_8_20.zip
+if [ ! -f "doxygen-Release_1_9_1.zip" ]; then
+    wget -q https://github.com/doxygen/doxygen/archive/Release_1_9_1.zip \
+        -O doxygen-Release_1_9_1.zip
 fi
 unzip -q doxygen-Release_*.zip
 rm doxygen-Release_*.zip
@@ -86,9 +86,9 @@ CXX_FLAGS=""
 
 if $thread || $memory; then
     # libc++
-    if [ ! -f "llvm-project-llvmorg-11.0.0.zip" ]; then
-        wget -q https://github.com/llvm/llvm-project/archive/llvmorg-11.0.0.zip \
-            -O llvm-project-llvmorg-11.0.0.zip
+    if [ ! -f "llvm-project-llvmorg-11.1.0.zip" ]; then
+        wget -q https://github.com/llvm/llvm-project/archive/llvmorg-11.1.0.zip \
+            -O llvm-project-llvmorg-11.1.0.zip
     fi
     unzip -q llvm-project-llvmorg-*.zip
     rm llvm-project-llvmorg-*.zip

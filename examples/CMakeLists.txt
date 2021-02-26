@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(examples LANGUAGES CXX)
 
-option(EXAMPLES_USE_ADD_SUBDIRECTORY "Use find package" OFF)
+option(EXAMPLES_USE_ADD_SUBDIRECTORY "Use add_subdirectory" OFF)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE
