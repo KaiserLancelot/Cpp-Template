@@ -7,7 +7,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sudo apt update
     sudo apt install gcc-10 g++-10 valgrind
 
-    bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+    sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
     sudo apt install clang-tidy-11 libc++-11-dev libc++abi-11-dev
 
