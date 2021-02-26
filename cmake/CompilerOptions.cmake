@@ -111,8 +111,10 @@ add_compiler_flag("-Wextra")
 add_compiler_flag("-Wpedantic")
 add_compiler_flag("-Werror")
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+if(CMAKE_COMPILER_IS_GNUCXX)
+  # TODO Use for C++
+  add_c_compiler_flag("-fanalyzer")
+else()
   add_compiler_flag("-Weverything")
-
   add_compiler_flag("-Wno-c++98-compat")
 endif()

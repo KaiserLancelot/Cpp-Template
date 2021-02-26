@@ -11,6 +11,24 @@ function(mangle_compiler_flag FLAG OUTPUT)
 endfunction()
 
 include(CheckCCompilerFlag)
+
+function(add_c_compiler_flag FLAG)
+  mangle_compiler_flag(${FLAG} MANGLED_FLAG)
+  set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
+  set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} ${FLAG}")
+  check_c_compiler_flag(${FLAG} ${MANGLED_FLAG}_C)
+  set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQUIRED_FLAGS})
+
+  if(${MANGLED_FLAG}_C)
+    set(CMAKE_C_FLAGS
+        "${CMAKE_C_FLAGS} ${FLAG}"
+        PARENT_SCOPE)
+  else()
+    message(
+      FATAL_ERROR "Required flag '${FLAG}' is not supported by the compiler")
+  endif()
+endfunction()
+
 include(CheckCXXCompilerFlag)
 
 function(add_cxx_compiler_flag FLAG)
