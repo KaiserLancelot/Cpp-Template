@@ -32,9 +32,9 @@ set(BENCHMARKS_EXECUTABLE benchmark)
 
 file(GLOB_RECURSE LIBRARY_SRC CONFIGURE_DEPENDS
      "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-set(EXECUTABLE_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
-list(REMOVE_ITEM LIBRARY_SRC ${EXECUTABLE_SRC})
+set(EXECUTABLE_SRC "${CMAKE_CURRENT_SOURCE_DIR}/tool/main.cpp")
 
+set(EXECUTABLE_TARGETS)
 set(LIBRARY_TARGETS)
 
 # ---------------------------------------------------------------------------------------
@@ -92,6 +92,8 @@ endif()
 # ---------------------------------------------------------------------------------------
 if(KLIB_BUILD_EXECUTABLE OR KLIB_BUILD_ALL)
   message(STATUS "Build executable")
+
+  list(APPEND EXECUTABLE_TARGETS ${EXECUTABLE})
   add_executable(${EXECUTABLE} ${EXECUTABLE_SRC})
   target_link_libraries(${EXECUTABLE} PRIVATE ${LIBRARY})
 endif()

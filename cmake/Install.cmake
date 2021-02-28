@@ -23,7 +23,7 @@ if(KLIB_INSTALL)
           "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR};$\{ORIGIN\}")
     endif()
 
-    install(TARGETS ${EXECUTABLE} DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS ${EXECUTABLE_TARGETS} DESTINATION ${CMAKE_INSTALL_BINDIR})
   endif()
 
   # ---------------------------------------------------------------------------------------
