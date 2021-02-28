@@ -18,8 +18,6 @@ cmake -S . -B build
 cmake --build build --config Release
 ```
 
-[CMake options](https://raw.githubusercontent.com/KaiserLancelot/cpp-template/master/cmake/Options.cmake)
-
 ## Install
 
 ```shell

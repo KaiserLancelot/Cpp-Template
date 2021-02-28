@@ -28,8 +28,8 @@ if $thread && $memory; then
 fi
 
 if $thread || $memory; then
-    export CC=clang-11
-    export CXX=clang++-11
+    export CC=clang
+    export CXX=clang++
     BUILD_TYPE=RelWithDebInfo
 fi
 

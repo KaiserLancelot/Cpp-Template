@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         config:
-          - { cc: "gcc-10", cxx: "g++-10" }
-          - { cc: "clang-11", cxx: "clang++-11" }
+          - { cc: "gcc", cxx: "g++" }
+          - { cc: "clang", cxx: "clang++" }
 
     steps:
       - uses: actions/checkout@v2
@@ -63,7 +63,7 @@ jobs:
           CXX: ${{ matrix.config.cxx }}
 
       - name: Upload release asset(deb)
-        if: ${{ matrix.config.cxx == 'g++-10' }}
+        if: ${{ matrix.config.cxx == 'g++' }}
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,7 +74,7 @@ jobs:
           asset_content_type: application/vnd.debian.binary-package
 
       - name: Upload release asset(tgz)
-        if: ${{ matrix.config.cxx == 'g++-10' }}
+        if: ${{ matrix.config.cxx == 'g++' }}
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

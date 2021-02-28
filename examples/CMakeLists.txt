@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.19)
 project(examples LANGUAGES CXX)
 
 option(EXAMPLES_USE_ADD_SUBDIRECTORY "Use add_subdirectory" OFF)

@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         config:
-          - { cc: "gcc-10", cxx: "g++-10" }
-          - { cc: "clang-11", cxx: "clang++-11" }
+          - { cc: "gcc", cxx: "g++" }
+          - { cc: "clang", cxx: "clang++" }
 
     steps:
       - uses: actions/checkout@v2
@@ -76,8 +76,8 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Memory -DKLIB_USE_LIBCXX=ON
         env:
-          CC: clang-11
-          CXX: clang++-11
+          CC: clang
+          CXX: clang++
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j$(nproc)
@@ -113,8 +113,8 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo \
           -DKLIB_BUILD_TESTS=ON -DKLIB_SANITIZER=Thread -DKLIB_USE_LIBCXX=ON
         env:
-          CC: clang-11
-          CXX: clang++-11
+          CC: clang
+          CXX: clang++
 
       - name: Build
         run: cmake --build build --config RelWithDebInfo -j$(nproc)

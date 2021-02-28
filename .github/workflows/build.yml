@@ -17,8 +17,8 @@ jobs:
           - { name: "Release" }
           - { name: "Debug" }
         config:
-          - { cc: "gcc-10", cxx: "g++-10" }
-          - { cc: "clang-11", cxx: "clang++-11" }
+          - { cc: "gcc", cxx: "g++" }
+          - { cc: "clang", cxx: "clang++" }
 
     steps:
       - uses: actions/checkout@v2
