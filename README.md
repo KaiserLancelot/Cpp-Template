@@ -13,14 +13,14 @@ A template for C++ projects using CMake
 
 ## Build
 
-```shell
+```bash
 cmake -S . -B build
 cmake --build build --config Release
 ```
 
 ## Install
 
-```shell
+```bash
 sudo cmake --build build --config Release --target install
 ```
 
