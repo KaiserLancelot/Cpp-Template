@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [v2.9.0](https://github.com/KaiserLancelot/cpp-template/releases/tag/v2.9.0) (2021-02-06)
+## [v2.9.2](https://github.com/KaiserLancelot/cpp-template/releases/tag/v2.9.2) (2021-02-28)
+
+[Full ChangeLog](https://github.com/KaiserLancelot/cpp-template/compare/v2.9.1...v2.9.2)
+
+## [v2.9.1](https://github.com/KaiserLancelot/cpp-template/releases/tag/v2.9.1) (2021-02-28)
+
+[Full ChangeLog](https://github.com/KaiserLancelot/cpp-template/compare/v2.9.0...v2.9.1)
+
+## [v2.9.0](https://github.com/KaiserLancelot/cpp-template/releases/tag/v2.9.0) (2021-02-26)
 
 [Full ChangeLog](https://github.com/KaiserLancelot/cpp-template/compare/v2.8.1...v2.9.0)
 

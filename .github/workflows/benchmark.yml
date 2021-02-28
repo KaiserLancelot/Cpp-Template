@@ -1,8 +1,10 @@
 name: Benchmark
 
 on:
-  release:
-    types: published
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 1 * *"
 
 jobs:
   build:
@@ -33,6 +35,7 @@ jobs:
         run: cmake --build build --config Release -j$(nproc)
 
       - name: Run benchmark(json)
+        if: ${{ github.event_name == 'push' }}
         run: |
           ./build/benchmarks/benchmark --benchmark_out=benchmark-result.json \
           --benchmark_out_format=json
@@ -43,6 +46,7 @@ jobs:
           --benchmark_out_format=console
 
       - name: Store benchmark result
+        if: ${{ github.event_name == 'push' }}
         uses: rhysd/github-action-benchmark@v1
         with:
           name: C++ Benchmark
