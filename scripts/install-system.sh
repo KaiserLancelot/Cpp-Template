@@ -3,7 +3,6 @@
 set -e
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     sudo apt update
     sudo apt install gcc-10 g++-10 valgrind
 

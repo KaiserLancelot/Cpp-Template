@@ -30,8 +30,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     endif()
   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     message(STATUS "Linux and Clang")
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11.1.0)
-      message(FATAL_ERROR "Clang version must be at least 11.1.0: "
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11.0.0)
+      message(FATAL_ERROR "Clang version must be at least 11.0.0: "
                           ${CMAKE_CXX_COMPILER_VERSION})
     endif()
   endif()
